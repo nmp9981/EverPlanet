@@ -13,7 +13,10 @@ public class PlayerMove : MonoBehaviour
     public void SetingPlayerPos(float xAmount, float zAmount)
     {
         Vector3 dir = new Vector3(xAmount, 0, zAmount);
+        if (dir.sqrMagnitude < 0.01f) return;
+
         transform.position += dir.normalized * 4 * Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 15);//캐릭터가 바라보는 방향으로 회전
     }
 
     /// <summary>

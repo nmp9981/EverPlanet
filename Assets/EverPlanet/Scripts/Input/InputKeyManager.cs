@@ -8,12 +8,7 @@ public class InputKeyManager : MonoBehaviour
 
     //플레이어 조작
     [SerializeField] PlayerMove playerMove;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] PlayerAttack playerAttack;
 
     // Update is called once per frame
     void Update()
@@ -40,6 +35,9 @@ public class InputKeyManager : MonoBehaviour
     /// </summary>
     void InputAttack()
     {
-
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            playerAttack.GeneralAttack();
+        }
     }
 }
