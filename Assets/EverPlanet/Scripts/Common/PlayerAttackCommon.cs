@@ -164,7 +164,7 @@ public static class PlayerAttackCommon
             GameObject damImg = DamageObjectFulling.DamageSkinInstance.MakeObj((damageString[i] - '0'));
             damImg.transform.position = damageStartPos + Vector3.right * DamageObjectFulling.DamageSkinInstance.damageImage[0].bounds.size.x * i * 0.5f;
         }
-        InputKeyManager.orderSortNum += 1;
+        InputKeyManager.orderSortNum = (InputKeyManager.orderSortNum + 1)%InputKeyManager.maxOrderSortNum;
     }
     /// <summary>
     /// 공격 미스 데미지 보이기
@@ -178,7 +178,7 @@ public static class PlayerAttackCommon
 
         GameObject damImg = DamageObjectFulling.DamageSkinInstance.MakeObj(30);
         damImg.transform.position = damageStartPos;
-        InputKeyManager.orderSortNum += 1;
+        InputKeyManager.orderSortNum = (InputKeyManager.orderSortNum + 1) % InputKeyManager.maxOrderSortNum;
     }
 
     /// <summary>
@@ -198,7 +198,7 @@ public static class PlayerAttackCommon
             GameObject damImg = DamageObjectFulling.DamageSkinInstance.MakeObj((damageString[i] - '0') + 10);
             damImg.transform.position = damageStartPos + Vector3.right * DamageObjectFulling.DamageSkinInstance.criticalDamageImage[0].bounds.size.x * i * 0.5f;
         }
-        InputKeyManager.orderSortNum += 1;
+        InputKeyManager.orderSortNum = (InputKeyManager.orderSortNum + 1) % InputKeyManager.maxOrderSortNum;
     }
     /// <summary>
     /// 피격 데미지 보이기
@@ -217,7 +217,7 @@ public static class PlayerAttackCommon
             GameObject damImg = DamageObjectFulling.DamageSkinInstance.MakeObj((damageString[i] - '0') + 20);
             damImg.transform.position = damageStartPos + Vector3.right * DamageObjectFulling.DamageSkinInstance.hitDamageImage[0].bounds.size.x * i * 1.5f;
         }
-        InputKeyManager.orderSortNum += 1;
+        InputKeyManager.orderSortNum = (InputKeyManager.orderSortNum + 1) % InputKeyManager.maxOrderSortNum;
     }
 
     /// <summary>
@@ -232,7 +232,7 @@ public static class PlayerAttackCommon
 
         GameObject damImg = DamageObjectFulling.DamageSkinInstance.MakeObj(31);
         damImg.transform.position = damageStartPos;
-        InputKeyManager.orderSortNum += 1;
+        InputKeyManager.orderSortNum = (InputKeyManager.orderSortNum + 1) % InputKeyManager.maxOrderSortNum;
     }
 
     /// <summary>

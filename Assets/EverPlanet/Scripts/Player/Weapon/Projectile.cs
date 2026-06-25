@@ -6,6 +6,9 @@ public class Projectile : MonoBehaviour
     GameObject player;
     GameObject target;
 
+    float timer = 0;
+    float destroyTimer = 10;
+
     void Awake()
     {
         player = GameObject.Find("Player");
@@ -18,6 +21,7 @@ public class Projectile : MonoBehaviour
 
         gameObject.transform.rotation = Quaternion.Euler(0, DotAngle()-90, 0);
 
+        timer = 0;
     }
     void Update()
     {
@@ -26,7 +30,10 @@ public class Projectile : MonoBehaviour
     void DragMove()
     {
         gameObject.transform.position += moveVec*5f * Time.deltaTime;
-       
+        timer += Time.deltaTime;
+
+        //생성 후 10초뒤 파괴
+        if(timer>destroyTimer) gameObject.SetActive(false);
     }
     //표창 y축 회전 정도
     float DotAngle()
@@ -39,11 +46,9 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if(collision.gameObject.tag.Contains("Monster"))
         {
             int damage = Random.Range(77,308);
-            Debug.Log(damage);
             PlayerAttackCommon.ShowDamageAsSkin(damage,collision.gameObject,1);
 
             gameObject.SetActive(false);

@@ -4,17 +4,22 @@ public class InputKeyManager : MonoBehaviour
 {
     //데미지 UI순서
     public static int orderSortNum { get; set; }
-
+    public const int maxOrderSortNum = 99999999;
 
     //플레이어 조작
     [SerializeField] PlayerMove playerMove;
     [SerializeField] PlayerAttack playerAttack;
+
+    //타이머
+    float currentTime = 0;
 
     // Update is called once per frame
     void Update()
     {
         InputMove();
         InputAttack();
+
+        TimeFlow();
     }
 
     /// <summary>
@@ -35,9 +40,21 @@ public class InputKeyManager : MonoBehaviour
     /// </summary>
     void InputAttack()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            playerAttack.GeneralAttack();
+            if (currentTime > 0.1f)
+            {
+                currentTime = 0;
+                playerAttack.GeneralAttack();
+            }
         }
+    }
+
+    /// <summary>
+    /// 시간 흐름
+    /// </summary>
+    void TimeFlow()
+    {
+        currentTime += Time.deltaTime;
     }
 }
