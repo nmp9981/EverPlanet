@@ -7,8 +7,11 @@ public class PlayerInfo : MonoBehaviour
     public float playerJumpPower = 7;
     public int maxJumpCount;
     protected float playerRotateSpeed = 15;
-    
 
+    //공격 관련
+    public static float attackPower = 2500;//공격력
+    public static float workmanship = 30;//숙련도
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

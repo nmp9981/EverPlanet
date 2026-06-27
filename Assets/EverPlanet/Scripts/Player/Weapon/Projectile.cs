@@ -48,7 +48,9 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.tag.Contains("Monster"))
         {
-            int damage = Random.Range(77,308);
+            int maxDamage = (int)PlayerInfo.attackPower;
+            int minDamage = (int)(PlayerInfo.attackPower*PlayerInfo.workmanship*0.01);
+            int damage = Random.Range(minDamage, maxDamage);
             PlayerAttackCommon.ShowDamageAsSkin(damage,collision.gameObject,1);
 
             gameObject.SetActive(false);

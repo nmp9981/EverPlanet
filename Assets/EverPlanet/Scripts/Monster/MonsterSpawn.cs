@@ -14,11 +14,6 @@ public class MonsterSpawn : MonoBehaviour
         SpawnFlow();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     /// <summary>
     /// 몬스터 스폰 과정
     /// </summary>
