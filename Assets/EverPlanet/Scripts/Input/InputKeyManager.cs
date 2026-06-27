@@ -48,6 +48,10 @@ public class InputKeyManager : MonoBehaviour
                 playerAttack.GeneralAttack();
             }
         }
+        if (Input.GetKey(KeyCode.Z))
+        {
+
+        }
     }
 
     /// <summary>

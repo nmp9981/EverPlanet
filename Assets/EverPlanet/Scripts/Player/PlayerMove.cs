@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : PlayerInfo
 {
     [SerializeField] Rigidbody rigid;
     [SerializeField] bool isJumping;
@@ -15,8 +15,8 @@ public class PlayerMove : MonoBehaviour
         Vector3 dir = new Vector3(xAmount, 0, zAmount);
         if (dir.sqrMagnitude < 0.01f) return;
 
-        transform.position += dir.normalized * 4 * Time.deltaTime;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 15);//캐릭터가 바라보는 방향으로 회전
+        transform.position += dir.normalized * playerSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * playerRotateSpeed);//캐릭터가 바라보는 방향으로 회전
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
         if (isJumping == false)//점프상태가 아니라면
         {
             isJumping = true;//점프중으로 바꾼다.
-            rigid.AddForce(new Vector2(0, 7), ForceMode.Impulse);//y축 방향으로 힘을 실어준다.(점프)
+            rigid.AddForce(new Vector2(0, playerJumpPower), ForceMode.Impulse);//y축 방향으로 힘을 실어준다.(점프)
         }
 
     }
