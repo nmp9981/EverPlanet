@@ -95,7 +95,7 @@ public static class PlayerAttackCommon
     {
         int criValue = Random.Range(1, 101);
 
-        if (criValue <= 50)
+        if (criValue <= PlayerInfo.criticalRate)
         {
             return true;
         }
@@ -148,6 +148,26 @@ public static class PlayerAttackCommon
     }
 
     /// <summary>
+    /// 캐릭터 -> 몬스터 공격
+    /// </summary>
+    public static void PlayerToMonsterAttack(Collision collision)
+    {
+        int maxDamage = (int)PlayerInfo.attackPower;
+        int minDamage = (int)(PlayerInfo.attackPower * PlayerInfo.workmanship * 0.01);
+        int damage = Random.Range(minDamage, maxDamage);
+
+        if (PlayerAttackCommon.IsCritical())
+        {
+            damage = (damage * PlayerInfo.criticalDamage) / 100;
+            PlayerAttackCommon.ShowCriticalDamageAsSkin(damage, collision.gameObject, 1);
+        }
+        else PlayerAttackCommon.ShowDamageAsSkin(damage, collision.gameObject, 1);
+
+        //몬스터가 데미지를 입음
+        collision.gameObject.GetComponent<MonsterInfo>().DecreaseMonsterHP(damage);
+    }
+
+    /// <summary>
     /// 공격 데미지 보이기
     /// </summary>
     /// <param name="Damage">데미지</param>
@@ -173,7 +193,7 @@ public static class PlayerAttackCommon
     /// <param name="playerPos">플레이어 위치</param>
     public static void ShowMissAttackDamageAsSkin(GameObject monsterPos, int hitNum)
     {
-        Bounds bounds = monsterPos.GetComponent<BoxCollider2D>().bounds;
+        Bounds bounds = monsterPos.GetComponent<BoxCollider>().bounds;
         Vector3 damageStartPos = bounds.center + Vector3.up * (hitNum * DamageObjectFulling.DamageSkinInstance.damageImage[0].bounds.size.y + 0.5f);
 
         GameObject damImg = DamageObjectFulling.DamageSkinInstance.MakeObj(30);
@@ -190,7 +210,7 @@ public static class PlayerAttackCommon
     {
         string damageString = Damage.ToString();
         float damageLength = DamageObjectFulling.DamageSkinInstance.criticalDamageImage[0].bounds.size.x * damageString.Length;
-        Bounds bounds = monsterPos.GetComponent<BoxCollider2D>().bounds;
+        Bounds bounds = monsterPos.GetComponent<BoxCollider>().bounds;
         Vector3 damageStartPos = bounds.center +Vector3.up * (hitNum * DamageObjectFulling.DamageSkinInstance.criticalDamageImage[0].bounds.size.y + 0.5f) + damageLength * Vector3.left * 0.2f;
 
         for (int i = 0; i < damageString.Length; i++)

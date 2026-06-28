@@ -48,13 +48,8 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.tag.Contains("Monster"))
         {
-            int maxDamage = (int)PlayerInfo.attackPower;
-            int minDamage = (int)(PlayerInfo.attackPower*PlayerInfo.workmanship*0.01);
-            int damage = Random.Range(minDamage, maxDamage);
-            PlayerAttackCommon.ShowDamageAsSkin(damage,collision.gameObject,1);
-
-            //몬스터가 데미지를 입음
-            collision.gameObject.GetComponent<MonsterInfo>().DecreaseMonsterHP(damage);
+            //공격 데미지 입히기
+            PlayerAttackCommon.PlayerToMonsterAttack(collision);
 
             //투사체 삭제
             gameObject.SetActive(false);
