@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterInfo : MonoBehaviour
@@ -12,13 +13,12 @@ public class MonsterInfo : MonoBehaviour
     public int mobAttack;//몬스터 공격력
     public int mobDefence;//몬스터 방어력
 
-    MonsterMove monsterMove;
+    [SerializeField] SpriteRenderer hpBarImage;
 
     private void OnEnable()
     {
         mobCurrentHP = mobMaxHP;
-        monsterMove = GetComponent<MonsterMove>();
-        monsterMove.HPBar.fillAmount = 1;
+        hpBarImage.gameObject.transform.localScale = new Vector3(1,1,1);
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class MonsterInfo : MonoBehaviour
     {
         mobCurrentHP = Mathf.Max(0, mobCurrentHP - damage);
         float rate = mobCurrentHP / mobMaxHP;
-        monsterMove.HPBar.fillAmount = rate;
+        hpBarImage.gameObject.transform.localScale = new Vector3(rate, 1, 1);
 
         //몬스터 사망
         if (mobCurrentHP <= 0)
