@@ -53,6 +53,10 @@ public class Projectile : MonoBehaviour
             int damage = Random.Range(minDamage, maxDamage);
             PlayerAttackCommon.ShowDamageAsSkin(damage,collision.gameObject,1);
 
+            //몬스터가 데미지를 입음
+            collision.gameObject.GetComponent<MonsterInfo>().DecreaseMonsterHP(damage);
+
+            //투사체 삭제
             gameObject.SetActive(false);
         }
     }
