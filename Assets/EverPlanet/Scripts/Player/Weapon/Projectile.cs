@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public int hitNum =1;
+    public int hitNum =2;
     public Vector3 moveVec;
     GameObject player;
     GameObject target;

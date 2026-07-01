@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
     {
         GameObject projecTile = objFulling.MakeObj(0);
         projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
-       
+        projecTile.GetComponent<Projectile>().hitNum = 2;
     }
     /// <summary>
     /// 던지기 공격
@@ -25,8 +25,8 @@ public class PlayerAttack : MonoBehaviour
         {
             GameObject projecTile = objFulling.MakeObj(2);
             projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
-            projecTile.GetComponent<Projectile>().hitNum = i + 1;
-            yield return new WaitForSeconds(0.25f);
+            projecTile.GetComponent<Projectile>().hitNum = i + 2;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

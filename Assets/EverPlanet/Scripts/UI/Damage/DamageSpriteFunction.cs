@@ -10,11 +10,11 @@ public class DamageSpriteFunction : MonoBehaviour
     }
     private void OnEnable()
     {
-        Invoke("EraseDamageImage", 0.5f);
+        Invoke("EraseDamageImage", 0.7f);
         spriteRenderer.sortingOrder = InputKeyManager.orderSortNum;
     }
     /// <summary>
-    /// 데미지 지우기 : 생성후 0.5초뒤에 실행
+    /// 데미지 지우기 : 생성후 1초뒤에 실행
     /// </summary>
     void EraseDamageImage()
     {
