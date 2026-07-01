@@ -24,13 +24,14 @@ public class PlayerAttack : MonoBehaviour
     {
         GameObject swardObj = objFulling.MakeObj(1);
         swardObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+        swardObj.transform.rotation = transform.rotation;//캐릭터가 바라보는 위치로 회전
 
-        float curRotate = 15;
-        float maxRotate = 165;
-        while (curRotate < maxRotate)
+        float angleRotate = 15;
+        float restRotate = 165;
+        while (restRotate>0)
         {
-            swardObj.transform.rotation = Quaternion.Euler(0, curRotate, 0);
-            curRotate += 15;
+            swardObj.transform.Rotate(0, angleRotate, 0);
+            restRotate -= angleRotate;
             yield return new WaitForSeconds(0.05f);
         }
         swardObj.gameObject.SetActive(false);

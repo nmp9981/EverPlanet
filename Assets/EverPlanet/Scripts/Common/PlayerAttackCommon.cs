@@ -150,7 +150,7 @@ public static class PlayerAttackCommon
     /// <summary>
     /// 캐릭터 -> 몬스터 공격
     /// </summary>
-    public static void PlayerToMonsterAttack(Collision collision)
+    public static void PlayerToMonsterAttack(Collider collision)
     {
         int maxDamage = (int)PlayerInfo.attackPower;
         int minDamage = (int)(PlayerInfo.attackPower * PlayerInfo.workmanship * 0.01);

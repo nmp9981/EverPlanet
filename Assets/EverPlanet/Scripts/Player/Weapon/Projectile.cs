@@ -44,12 +44,12 @@ public class Projectile : MonoBehaviour
         return theta;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag.Contains("Monster"))
+        if (other.gameObject.tag.Contains("Monster"))
         {
             //공격 데미지 입히기
-            PlayerAttackCommon.PlayerToMonsterAttack(collision);
+            PlayerAttackCommon.PlayerToMonsterAttack(other);
 
             //투사체 삭제
             gameObject.SetActive(false);
