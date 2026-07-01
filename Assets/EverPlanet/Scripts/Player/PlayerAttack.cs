@@ -16,6 +16,19 @@ public class PlayerAttack : MonoBehaviour
         projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
        
     }
+    /// <summary>
+    /// 던지기 공격
+    /// </summary>
+    public IEnumerator ThrowAttack()
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            GameObject projecTile = objFulling.MakeObj(2);
+            projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+            projecTile.GetComponent<Projectile>().hitNum = i + 1;
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
 
     /// <summary>
     /// 휘두르기 공격

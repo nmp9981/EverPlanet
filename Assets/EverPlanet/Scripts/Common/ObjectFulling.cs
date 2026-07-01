@@ -4,7 +4,7 @@ public class ObjectFulling : MonoBehaviour
 {
     //프리팹 준비
     const int blockMaxCount = 80;
-    const int blockKinds = 2;
+    const int blockKinds = 3;
     public GameObject[] blockPrefabs;
 
     //오브젝트 배열
@@ -17,7 +17,7 @@ public class ObjectFulling : MonoBehaviour
         {
              new GameObject[blockMaxCount],
              new GameObject[blockMaxCount],
-             
+             new GameObject[blockMaxCount]
         };
         Generate();
     }

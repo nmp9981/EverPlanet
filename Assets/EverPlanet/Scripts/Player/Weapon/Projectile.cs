@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int hitNum =1;
     public Vector3 moveVec;
     GameObject player;
     GameObject target;
@@ -49,7 +50,7 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag.Contains("Monster"))
         {
             //공격 데미지 입히기
-            PlayerAttackCommon.PlayerToMonsterAttack(other);
+            PlayerAttackCommon.PlayerToMonsterAttack(other,100,hitNum);
 
             //투사체 삭제
             gameObject.SetActive(false);
