@@ -48,9 +48,9 @@ public class InputKeyManager : MonoBehaviour
                 playerAttack.GeneralAttack();
             }
         }
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-
+            StartCoroutine(playerAttack.SwingAttack());
         }
     }
 
