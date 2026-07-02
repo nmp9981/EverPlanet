@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     GameObject target;
 
     float timer = 0;
-    float destroyTimer = 10;
+    float destroyTimer = 9;
 
     void Awake()
     {

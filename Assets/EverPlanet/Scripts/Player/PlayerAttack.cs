@@ -36,6 +36,9 @@ public class PlayerAttack : MonoBehaviour
     public IEnumerator SwingAttack()
     {
         GameObject swardObj = objFulling.MakeObj(1);
+        Sward sward = swardObj.GetComponent<Sward>();
+        sward.targetCount = 0;
+        sward.maxTarget = 6;
         swardObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
         swardObj.transform.rotation = transform.rotation;//캐릭터가 바라보는 위치로 회전
 
