@@ -3,7 +3,7 @@ guid: f4889462f68065b4b8c1753002e2fba5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,8 +93,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
+  - serializedVersion: 4
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -106,7 +106,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -119,7 +119,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -144,8 +144,9 @@ TextureImporter:
         width: 144
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 12, z: 0, w: 14}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -165,8 +166,9 @@ TextureImporter:
         width: 108
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 7, z: 0, w: 14}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -186,8 +188,9 @@ TextureImporter:
         width: 144
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 8, z: 0, w: 14}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -207,8 +210,9 @@ TextureImporter:
         width: 131
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 16}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -223,13 +227,14 @@ TextureImporter:
       name: "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_4"
       rect:
         serializedVersion: 2
-        x: 552
+        x: 553
         y: 0
         width: 144
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 14}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -249,8 +254,9 @@ TextureImporter:
         width: 144
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 14}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -270,8 +276,9 @@ TextureImporter:
         width: 144
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 9, z: 0, w: 14}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -287,12 +294,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 996
-        y: 0
+        y: 7
         width: 136
-        height: 173
+        height: 149
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -308,12 +316,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1136
-        y: 0
+        y: 9
         width: 144
-        height: 173
+        height: 164
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 17}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -333,8 +342,9 @@ TextureImporter:
         width: 144
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 17}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -345,7 +355,30 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_10"
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 162
+        width: 5
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6da083ba2b0cba54584cc3319723bd16
+      internalID: -1184844708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5617715a5b5f3504298e365eb114ee7f
@@ -355,9 +388,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_0": 911103003
       "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_1": -1109556596
+      "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_10": -1184844708
       "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_2": -1343813531
       "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_3": 1837048473
       "\uD06C\uB9AC\uB370\uBBF8\uC9C0-removebg-preview_4": -833658165
