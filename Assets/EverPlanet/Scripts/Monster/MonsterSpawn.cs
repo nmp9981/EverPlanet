@@ -19,10 +19,10 @@ public class MonsterSpawn : MonoBehaviour
     /// </summary>
     void SpawnFlow()
     {
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < 36; i++)
         {
-            float xRan = Random.Range(-10, 10);
-            float zRan = Random.Range(-10, 10);
+            float xRan = Random.Range(-12, 12);
+            float zRan = Random.Range(-12, 12);
             GameObject mob = monsterFulling.MakeObj(0);
             mob.transform.position = new Vector3(xRan, 0f, zRan);
         }
