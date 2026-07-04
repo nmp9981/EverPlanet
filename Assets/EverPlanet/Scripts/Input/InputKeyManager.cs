@@ -56,6 +56,10 @@ public class InputKeyManager : MonoBehaviour
         {
             StartCoroutine(playerAttack.ThrowAttack());
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(playerAttack.Meteo());
+        }
     }
 
     /// <summary>

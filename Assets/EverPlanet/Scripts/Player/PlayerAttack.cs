@@ -53,4 +53,18 @@ public class PlayerAttack : MonoBehaviour
         swardObj.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 메테오
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Meteo()
+    {
+        //원 이펙트 생성
+        yield return new WaitForSeconds(0.1f);
+        //원 위치는 몬스터 머리 위
+
+        //크리스탈 떨어드리기
+        GameObject crystalObj = objFulling.MakeObj(3);
+        //크리스탈은 원 위치에 놓기
+    }
 }
