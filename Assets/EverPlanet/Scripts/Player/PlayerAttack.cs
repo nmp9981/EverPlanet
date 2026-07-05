@@ -7,6 +7,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] ObjectFulling objFulling;
     [SerializeField] Transform playerDirObjectTransform;
 
+    [Header("이펙트")]
+    [SerializeField] GameObject fireDemonEffect;
+
     /// <summary>
     /// 일반 공격
     /// </summary>
@@ -99,7 +102,11 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     public IEnumerator Penetration()
     {
-        yield return new WaitForSeconds(0.2f);
+        GameObject penetrateEffect = Instantiate(fireDemonEffect);
+        penetrateEffect.transform.position = playerDirObjectTransform.position;
+        penetrateEffect.transform.rotation = transform.rotation;
+
+        yield return new WaitForSeconds(0.5f);
         GameObject projecTile = objFulling.MakeObj(5);
         projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
         Projectile proj = projecTile.GetComponent<Projectile>();
@@ -107,5 +114,8 @@ public class PlayerAttack : MonoBehaviour
         proj.skillDamage = 300;
         proj.isPenetration = true;
         proj.maxTarget = 6;
+
+        yield return new WaitForSeconds(0.25f);
+        Destroy(penetrateEffect);
     }
 }
