@@ -40,7 +40,7 @@ public class InputKeyManager : MonoBehaviour
     /// </summary>
     void InputAttack()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))//폭풍의 시
         {
             if (currentTime > 0.1f)
             {
@@ -48,21 +48,25 @@ public class InputKeyManager : MonoBehaviour
                 playerAttack.GeneralAttack();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))//휘두르기
         {
             StartCoroutine(playerAttack.SwingAttack());
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))//트리플스로우
         {
             StartCoroutine(playerAttack.ThrowAttack());
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))//관통기
         {
             StartCoroutine(playerAttack.Penetration());
         }
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V))//광역기, 범위기
         {
             StartCoroutine(playerAttack.Meteo());
+        }
+        if (Input.GetKeyDown(KeyCode.B))//찌르기
+        {
+            StartCoroutine(playerAttack.PierceAttack());
         }
     }
 

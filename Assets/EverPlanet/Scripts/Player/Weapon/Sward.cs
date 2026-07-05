@@ -4,6 +4,8 @@ public class Sward : MonoBehaviour
 {
     public int targetCount;
     public int maxTarget;
+    public int skillDamage;
+    public bool isSwing;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +15,7 @@ public class Sward : MonoBehaviour
             if (targetCount < maxTarget)
             {
                 //공격 데미지 입히기
-                PlayerAttackCommon.PlayerToMonsterAttack(other, 260, 1);
+                PlayerAttackCommon.PlayerToMonsterAttack(other, skillDamage, 2);
 
                 targetCount++;
             }

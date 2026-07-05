@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class PlayerAttack : MonoBehaviour
         Sward sward = swardObj.GetComponent<Sward>();
         sward.targetCount = 0;
         sward.maxTarget = 6;
+        sward.skillDamage = 260;
         swardObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
         swardObj.transform.rotation = transform.rotation;//캐릭터가 바라보는 위치로 회전
 
@@ -55,6 +57,35 @@ public class PlayerAttack : MonoBehaviour
             swardObj.transform.Rotate(0, angleRotate, 0);
             restRotate -= angleRotate;
             yield return new WaitForSeconds(0.05f);
+        }
+        swardObj.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 찌르기 공격
+    /// </summary>
+    public IEnumerator PierceAttack()
+    {
+        GameObject swardObj = objFulling.MakeObj(6);
+        Sward sward = swardObj.GetComponent<Sward>();
+        sward.targetCount = 0;
+        sward.maxTarget = 1;
+        sward.skillDamage = 170;
+
+        Vector3 moveVec = (playerDirObjectTransform.transform.position - this.gameObject.transform.position).normalized;
+        moveVec.y = 0f;
+
+        //초기 위치
+        swardObj.transform.position = transform.position-moveVec;//캐릭터 위치에서 날리기 시작
+        swardObj.transform.rotation = transform.rotation;//캐릭터가 바라보는 위치로 회전
+
+        float angleRotate = 30;
+        float restRotate = 90;
+        while (restRotate > 0)
+        {
+            swardObj.transform.position += moveVec;
+            restRotate -= angleRotate;
+            yield return new WaitForSeconds(0.04f);
         }
         swardObj.gameObject.SetActive(false);
     }
