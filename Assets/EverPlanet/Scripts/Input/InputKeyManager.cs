@@ -68,6 +68,10 @@ public class InputKeyManager : MonoBehaviour
         {
             StartCoroutine(playerAttack.PierceAttack());
         }
+        if (Input.GetKeyDown(KeyCode.N))//ÆøÅº °ø°Ý
+        {
+            StartCoroutine(playerAttack.BoomAttack());
+        }
     }
 
     /// <summary>

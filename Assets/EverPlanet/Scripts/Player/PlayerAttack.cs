@@ -149,4 +149,16 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         Destroy(penetrateEffect);
     }
+    /// <summary>
+    /// 폭탄 공격
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator BoomAttack()
+    {
+        GameObject projecTile = objFulling.MakeObj(7);
+        projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+        Boom bomb = projecTile.GetComponent<Boom>();
+       
+        yield return new WaitForSeconds(0.25f);
+    }
 }
