@@ -13,8 +13,11 @@ public class PlayerAttack : MonoBehaviour
     public void GeneralAttack()
     {
         GameObject projecTile = objFulling.MakeObj(0);
+        Projectile proj = projecTile.GetComponent<Projectile>();
         projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
-        projecTile.GetComponent<Projectile>().hitNum = 2;
+        proj.hitNum = 2;
+        proj.skillDamage = 100;
+        proj.isPenetration = false;//관통 X
     }
     /// <summary>
     /// 던지기 공격
@@ -88,5 +91,21 @@ public class PlayerAttack : MonoBehaviour
       
         circleList.Clear();
         targets.Clear();
+    }
+
+    /// <summary>
+    /// 관통기
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Penetration()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameObject projecTile = objFulling.MakeObj(5);
+        projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+        Projectile proj = projecTile.GetComponent<Projectile>();
+        proj.hitNum = 2;
+        proj.skillDamage = 300;
+        proj.isPenetration = true;
+        proj.maxTarget = 6;
     }
 }

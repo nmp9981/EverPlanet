@@ -3,10 +3,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int hitNum =2;
+    public int maxTarget;
+    public int skillDamage;
+    public bool isPenetration;
     public Vector3 moveVec;
     GameObject player;
     GameObject target;
 
+    int targetCount = 0;
     float timer = 0;
     float destroyTimer = 9;
 
@@ -23,6 +27,7 @@ public class Projectile : MonoBehaviour
         gameObject.transform.rotation = Quaternion.Euler(0, DotAngle()-90, 0);
 
         timer = 0;
+        targetCount = 0;
     }
     void Update()
     {
@@ -49,11 +54,18 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.tag.Contains("Monster"))
         {
-            //공격 데미지 입히기
-            PlayerAttackCommon.PlayerToMonsterAttack(other,100,hitNum);
+            if (isPenetration)//관통체만
+            {
+                if (maxTarget <= targetCount) return;
+            }
 
-            //투사체 삭제
-            gameObject.SetActive(false);
+            //공격 데미지 입히기
+            PlayerAttackCommon.PlayerToMonsterAttack(other,skillDamage,hitNum);
+
+            //투사체 삭제(관통 X)
+            if(!isPenetration) gameObject.SetActive(false);
+
+            targetCount += 1;
         }
     }
 }
