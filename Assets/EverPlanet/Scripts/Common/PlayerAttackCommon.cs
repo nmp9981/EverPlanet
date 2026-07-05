@@ -88,6 +88,34 @@ public static class PlayerAttackCommon
         return mobInArea;
     }
     /// <summary>
+    /// 플레이어로부터 범위내에 있는 몬스터들 반환
+    /// 이때 플레이어가 바라보는 방향 미고려
+    /// </summary>
+    public static List<GameObject> TargetMonstersInRange(Vector3 playerPos, float limitXDist, float limitYDist, float countslimit)
+    {
+        List<GameObject> mobInArea = new List<GameObject>();
+        foreach (var mob in MonsterSpawn.activeMonster)
+        {
+            //거리 검사
+            float curDist = (mob.transform.position - playerPos).magnitude;
+            //X축 범위 제한
+            if (curDist > limitXDist)
+                continue;
+
+            //y축 범위 제한
+            if (Mathf.Abs(mob.transform.position.y - playerPos.y) > limitYDist)
+                continue;
+
+            //범위내에 몬스터가 있으므로 공격 대상으로 설정
+            mobInArea.Add(mob);
+
+            //최대 타깃수에 도달하면 반복문을 실행하지않고 빠져나간다.
+            if (mobInArea.Count >= countslimit)
+                break;
+        }
+        return mobInArea;
+    }
+    /// <summary>
     /// 크리티컬 판정
     /// </summary>
     /// <returns></returns>

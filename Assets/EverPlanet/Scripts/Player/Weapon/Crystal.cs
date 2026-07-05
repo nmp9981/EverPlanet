@@ -21,7 +21,7 @@ public class Crystal : MonoBehaviour
         if(other.gameObject.tag.Contains("Monster"))
         {
             //공격 데미지 입히기
-            PlayerAttackCommon.PlayerToMonsterAttack(other, 150, hitNum);
+            PlayerAttackCommon.PlayerToMonsterAttack(other, 550, hitNum=2);
 
             //투사체 삭제
             gameObject.SetActive(false);

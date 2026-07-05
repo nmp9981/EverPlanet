@@ -25,6 +25,7 @@ public class MonsterSpawn : MonoBehaviour
             float zRan = Random.Range(-12, 12);
             GameObject mob = monsterFulling.MakeObj(0);
             mob.transform.position = new Vector3(xRan, 0f, zRan);
+            activeMonster.Add(mob);
         }
     }
 }

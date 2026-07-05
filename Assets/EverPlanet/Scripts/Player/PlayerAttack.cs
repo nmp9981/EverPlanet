@@ -1,6 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -59,12 +59,28 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     public IEnumerator Meteo()
     {
-        //원 이펙트 생성
-        yield return new WaitForSeconds(0.1f);
+        //공격 대상 몬스터
+        List<GameObject> targets = PlayerAttackCommon.TargetMonstersInRange(this.gameObject.transform.position,8,2,10);
+    
         //원 위치는 몬스터 머리 위
-
+        List<GameObject> circleList = new List<GameObject>();
+        foreach(GameObject target in targets)
+        {
+            GameObject crystalCircleObj = objFulling.MakeObj(4);
+            BoxCollider collider = target.GetComponent<BoxCollider>();
+            crystalCircleObj.transform.position = target.transform.position+2*collider.size.y*Vector3.up;
+            circleList.Add(crystalCircleObj);
+        }
+        yield return new WaitForSeconds(0.8f);
         //크리스탈 떨어드리기
-        GameObject crystalObj = objFulling.MakeObj(3);
         //크리스탈은 원 위치에 놓기
+        foreach (GameObject circle in circleList)
+        {
+            GameObject crystalCircleObj = objFulling.MakeObj(3);
+            crystalCircleObj.transform.position = circle.transform.position;
+            circle.SetActive(false);
+        }
+        
+        circleList.Clear();
     }
 }
