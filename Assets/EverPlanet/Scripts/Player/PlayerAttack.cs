@@ -68,19 +68,25 @@ public class PlayerAttack : MonoBehaviour
         {
             GameObject crystalCircleObj = objFulling.MakeObj(4);
             BoxCollider collider = target.GetComponent<BoxCollider>();
-            crystalCircleObj.transform.position = target.transform.position+2*collider.size.y*Vector3.up;
+            crystalCircleObj.transform.position = target.transform.position+3*collider.size.y*Vector3.up;
             circleList.Add(crystalCircleObj);
         }
         yield return new WaitForSeconds(0.8f);
         //크리스탈 떨어드리기
         //크리스탈은 원 위치에 놓기
-        foreach (GameObject circle in circleList)
+        for(int hit = 2; hit < 6; hit++)
         {
-            GameObject crystalCircleObj = objFulling.MakeObj(3);
-            crystalCircleObj.transform.position = circle.transform.position;
-            circle.SetActive(false);
+            foreach (GameObject circle in circleList)
+            {
+                GameObject crystalCircleObj = objFulling.MakeObj(3);
+                crystalCircleObj.GetComponent<Crystal>().hitNum = hit;
+                crystalCircleObj.transform.position = circle.transform.position;
+                circle.SetActive(false);
+            }
+            yield return new WaitForSeconds(0.2f);
         }
-        
+      
         circleList.Clear();
+        targets.Clear();
     }
 }
