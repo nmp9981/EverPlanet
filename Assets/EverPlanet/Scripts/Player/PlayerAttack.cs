@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("이펙트")]
     [SerializeField] GameObject fireDemonEffect;
+    [SerializeField] GameObject claoudEffect;
 
     /// <summary>
     /// 일반 공격
