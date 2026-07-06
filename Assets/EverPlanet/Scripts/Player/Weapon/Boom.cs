@@ -3,14 +3,11 @@ using UnityEngine;
 public class Boom : MonoBehaviour
 {
     [SerializeField] Rigidbody rigid;
+    [SerializeField] Cloud cloudEffect;
 
     GameObject player;
     GameObject target;
     public Vector3 moveVec;
-
-    int targetCount = 0;
-    float timer = 0;
-    float destroyTimer = 9;
 
     void Awake()
     {
@@ -21,23 +18,17 @@ public class Boom : MonoBehaviour
     {
         moveVec = (target.transform.position+Vector3.up - player.transform.position).normalized;
         rigid.AddForce(5*moveVec,ForceMode.Impulse);
-        timer = 0;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         //몬스터
-        if (other.gameObject.tag.Contains("Monster"))
+        if (collision.gameObject.tag.Contains("Land"))
         {
-            //공격 데미지 입히기
-            PlayerAttackCommon.PlayerToMonsterAttack(other, 800, 2);
+            //연기 생성
+            GameObject cloudEff = Instantiate(cloudEffect.gameObject);
+            cloudEff.transform.position = this.transform.position;
 
-            //투사체 삭제
-            gameObject.SetActive(false);
-        }
-        //땅
-        if (other.gameObject.tag.Contains("Land"))
-        {
             //투사체 삭제
             gameObject.SetActive(false);
         }

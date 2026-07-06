@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("이펙트")]
     [SerializeField] GameObject fireDemonEffect;
-    [SerializeField] GameObject claoudEffect;
+    [SerializeField] GameObject cloudEffect;
 
     /// <summary>
     /// 일반 공격
@@ -156,10 +156,9 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     public IEnumerator BoomAttack()
     {
-        GameObject projecTile = objFulling.MakeObj(7);
-        projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
-        Boom bomb = projecTile.GetComponent<Boom>();
-       
+        GameObject boomObj = objFulling.MakeObj(7);
+        boomObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+        Boom bomb = boomObj.GetComponent<Boom>();
         yield return new WaitForSeconds(0.25f);
     }
 }
