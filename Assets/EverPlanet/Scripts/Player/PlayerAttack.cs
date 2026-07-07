@@ -156,9 +156,9 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     public IEnumerator BoomAttack()
     {
+        yield return new WaitForSeconds(0.25f);
         GameObject boomObj = objFulling.MakeObj(7);
         boomObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
-        Boom bomb = boomObj.GetComponent<Boom>();
-        yield return new WaitForSeconds(0.25f);
+        Debug.Log("#####");
     }
 }

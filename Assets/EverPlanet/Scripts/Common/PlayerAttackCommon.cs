@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -114,6 +115,28 @@ public static class PlayerAttackCommon
                 break;
         }
         return mobInArea;
+    }
+    /// <summary>
+    /// 도트 데미지 입히기
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public static IEnumerator DoteAttack(Collider other, float maxTimer, float damageTime ,int skillDamage)
+    {
+        var mob = other.gameObject.GetComponent<MonsterInfo>();
+        if (mob != null)
+        {
+            for (int i = 0; i < maxTimer; i++)
+            {
+                //몹이 이미 사망함
+                if (mob.mobCurrentHP <= 0) break;
+
+                //지속 데미지 입히기
+                PlayerToMonsterAttack(other, skillDamage, 2);
+
+                yield return new WaitForSecondsRealtime(damageTime);
+            }
+        }
     }
     /// <summary>
     /// 크리티컬 판정
