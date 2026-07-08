@@ -72,6 +72,10 @@ public class InputKeyManager : MonoBehaviour
         {
             StartCoroutine(playerAttack.BoomAttack());
         }
+        if (Input.GetKeyDown(KeyCode.M))//¼³Ä¡±â
+        {
+            StartCoroutine(playerAttack.InstallAttack());
+        }
     }
 
     /// <summary>

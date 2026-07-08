@@ -156,9 +156,18 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     public IEnumerator BoomAttack()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         GameObject boomObj = objFulling.MakeObj(7);
         boomObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
-        Debug.Log("#####");
+    }
+    /// <summary>
+    /// 설치기 공격
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator InstallAttack()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameObject installObj = objFulling.MakeObj(8);
+        installObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에 설치
     }
 }
