@@ -49,6 +49,7 @@ public class MonsterInfo : MonoBehaviour
     /// </summary>
     public void MonsterDie()
     {
+        MonsterSpawn.activeMonster.Remove(this.gameObject);
         this.gameObject.SetActive(false);
     }
 }

@@ -29,8 +29,8 @@ public class Boom : MonoBehaviour
         {
             isCollide = true;
             //연기 생성
-            GameObject cloudEff = Instantiate(cloudEffect.gameObject);
-            cloudEff.transform.position = this.transform.position;
+            Cloud cloudEff = Instantiate(cloudEffect, this.transform.position, Quaternion.identity);
+            cloudEff.Init(this.transform.position);
 
             //투사체 삭제
             gameObject.SetActive(false);

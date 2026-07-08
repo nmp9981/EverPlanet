@@ -1,22 +1,33 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Cloud : MonoBehaviour
 {
     private float timer;
-    public float maxTimer = 1;
-    public float maxCount = 9;
+    public float maxTimer = 5;
+    public Vector3 startPos;
+    [SerializeField] List<Collider> mobCollide = new List<Collider>();
+    [SerializeField] List<GameObject> targets = new List<GameObject>();
 
-    private void OnEnable()
+    /// <summary>
+    /// 초기화
+    /// </summary>
+    /// <param name="startPos"></param>
+    public void Init(Vector3 startPos)
     {
-        List<GameObject> targets = PlayerAttackCommon.TargetMonstersInRange(this.gameObject.transform.position, 3,2,15);
+        this.startPos = startPos;
+
+        mobCollide.Clear();
+        targets.Clear();
+
+        targets = PlayerAttackCommon.TargetMonstersInRange(startPos, 5,2,15);
         foreach (GameObject target in targets)
         {
             var mob = target.GetComponent<BoxCollider>();
-            PlayerAttackCommon.PlayerToMonsterAttack(mob, 800, 2);
+            PlayerAttackCommon.PlayerToMonsterAttack(mob, 900, 2);
+            mobCollide.Add(mob);
         }
+        DoteAttackInrange();
         timer = 0;
     }
 
@@ -29,12 +40,11 @@ public class Cloud : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void DoteAttackInrange()
     {
-        //몬스터
-        if (other.gameObject.tag.Contains("Monster"))
+        foreach (var mob in mobCollide)
         {
-            StartCoroutine(PlayerAttackCommon.DoteAttack(other, maxTimer, 1, 50));
+            StartCoroutine(PlayerAttackCommon.DoteAttack(mob, maxTimer, 1, 50));
         }
     }
 }
