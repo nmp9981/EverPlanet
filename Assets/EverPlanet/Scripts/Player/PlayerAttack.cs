@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
     /// <summary>
     /// 휘두르기 공격
     /// </summary>
-    public IEnumerator SwingAttack()
+    public IEnumerator SwingAttackX()
     {
         GameObject swardObj = objFulling.MakeObj(1);
         Sward sward = swardObj.GetComponent<Sward>();
@@ -58,6 +58,34 @@ public class PlayerAttack : MonoBehaviour
             swardObj.transform.Rotate(0, angleRotate, 0);
             restRotate -= angleRotate;
             yield return new WaitForSeconds(0.05f);
+        }
+        swardObj.gameObject.SetActive(false);
+    }
+    /// <summary>
+    /// 휘두르기 공격
+    /// </summary>
+    public IEnumerator SwingAttackY()
+    {
+        GameObject swardObj = objFulling.MakeObj(1);
+        Sward sward = swardObj.GetComponent<Sward>();
+        sward.targetCount = 0;
+        sward.maxTarget = 3;
+        sward.skillDamage = 320;
+        swardObj.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+        Quaternion baseRotation = transform.rotation;//캐릭터가 바라보는 위치로 회전
+
+        float currentAngle = -105f; // 시작 각도
+        float targetAngle = 30f;    // 끝 각도 (-105 + 135 = 30)
+        float angleRotate = 10;
+       
+        while (currentAngle < targetAngle)
+        {
+            // 2. 매 프레임 [베이스 방향]에 [X축 각도]와 [Z축 90도(칼 세우기)]를 결합한 절대 회전값을 주입합니다.
+            // Quaternion.Euler(X, Y, Z) 순서로 조합되므로 Y축 간섭을 막아줍니다.
+            swardObj.transform.rotation = baseRotation * Quaternion.Euler(currentAngle, 0,-90);
+
+            currentAngle += angleRotate;
+            yield return new WaitForSeconds(0.03f);
         }
         swardObj.gameObject.SetActive(false);
     }

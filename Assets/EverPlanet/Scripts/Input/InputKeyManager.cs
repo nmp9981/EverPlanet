@@ -48,9 +48,13 @@ public class InputKeyManager : MonoBehaviour
                 playerAttack.GeneralAttack();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Z))//휘두르기
+        if (Input.GetKeyDown(KeyCode.Z))//휘두르기X
         {
-            StartCoroutine(playerAttack.SwingAttack());
+            StartCoroutine(playerAttack.SwingAttackX());
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))//휘두르기Y
+        {
+            StartCoroutine(playerAttack.SwingAttackY());
         }
         if (Input.GetKeyDown(KeyCode.X))//트리플스로우
         {
