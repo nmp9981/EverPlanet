@@ -80,6 +80,10 @@ public class InputKeyManager : MonoBehaviour
         {
             StartCoroutine(playerAttack.InstallAttack());
         }
+        if (Input.GetKeyDown(KeyCode.F))//¹Ð°Ý
+        {
+            playerAttack.PushAttack();
+        }
     }
 
     /// <summary>

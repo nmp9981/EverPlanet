@@ -55,30 +55,34 @@ public static class PlayerAttackCommon
         float dist = float.MaxValue;
         foreach (var mob in MonsterSpawn.activeMonster)
         {
-            //방향이 같은지 검사
+            //거리
             Vector3 diff = mob.transform.position - playerPos;
-            //diff가 양수면 몬스터가 오른쪽, 음수면 몬스터가 왼쪽에 있다.
-            //아래 결과가 음수면 캐릭터가 바라보는 방향에는 해당 몬스터가 없다.
-            float dotValue = diff.x * lookDir.x;//내적 값
-            if (dotValue < 0)
-                continue;
 
             //거리 검사
-            float curDist = diff.magnitude;
+            float curDist = diff.x;
             //X축 범위 제한
-            if (curDist > limitXDist)
+            if (Mathf.Abs(curDist) > limitXDist)
                 continue;
 
             //y축 범위 제한
             if (Mathf.Abs(mob.transform.position.y - playerPos.y) > limitYDist)
                 continue;
 
+            //방향이 같은지 검사
+            //diff가 양수면 몬스터가 오른쪽, 음수면 몬스터가 왼쪽에 있다.
+            //아래 결과가 음수면 캐릭터가 바라보는 방향에는 해당 몬스터가 없다.
+            float dotValue = diff.x * lookDir.x;//내적 값
+            Debug.Log(diff.x+" "+lookDir.x+ " "+lookDir.y+" "+lookDir.z);
+            if (dotValue < 0)
+                continue;
+            
             //사잇각이 너무 높으면 근처 몬스터로 보지 않는다.
             float cos = dotValue / curDist;
             float theta = Mathf.Abs(Mathf.Acos(cos));
+         
             if (theta > limitAngle)
                 continue;
-
+    
             //범위내에 몬스터가 있으므로 공격 대상으로 설정
             mobInArea.Add(mob);
 
