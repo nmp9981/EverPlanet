@@ -204,7 +204,7 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     public void PushAttack()
     {
-        Vector3 lookDir = transform.rotation.eulerAngles;
+        Vector3 lookDir = playerDirObjectTransform.position-transform.position;
         List<GameObject> mobList = PlayerAttackCommon.TargetMonstersFromPlayer(lookDir,gameObject.transform.position,3,2,10);
         
         foreach (GameObject mobObj in mobList)
@@ -212,6 +212,7 @@ public class PlayerAttack : MonoBehaviour
             Rigidbody rb = mobObj.GetComponent<Rigidbody>();
             Collider collider = mobObj.GetComponent<Collider>();
             Vector3 forcePower = 3 * lookDir.normalized;
+            forcePower.y = 0;
             rb.AddForce(forcePower,ForceMode.Impulse);
             PlayerAttackCommon.PlayerToMonsterAttack(collider,100,2);
         }

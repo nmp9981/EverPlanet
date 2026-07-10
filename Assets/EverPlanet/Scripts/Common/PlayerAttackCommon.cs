@@ -49,7 +49,7 @@ public static class PlayerAttackCommon
     /// 플레이어로부터 범위내에 있는 몬스터들 반환
     /// 이때 플레이어가 바라보는 방향 고려
     /// </summary>
-    public static List<GameObject> TargetMonstersFromPlayer(Vector3 lookDir, Vector3 playerPos, float limitXDist, float limitYDist, float countslimit,float limitAngle = PIDiv03)
+    public static List<GameObject> TargetMonstersFromPlayer(Vector3 lookDir, Vector3 playerPos, float limitRadius, float limitYDist, float countslimit,float limitAngle = PIDiv03)
     {
         List<GameObject> mobInArea = new List<GameObject>();
         float dist = float.MaxValue;
@@ -59,9 +59,9 @@ public static class PlayerAttackCommon
             Vector3 diff = mob.transform.position - playerPos;
 
             //거리 검사
-            float curDist = diff.x;
-            //X축 범위 제한
-            if (Mathf.Abs(curDist) > limitXDist)
+            float curDist = diff.x*diff.x + diff.z*diff.z;
+            //반지름 범위 제한
+            if (curDist > limitRadius*limitRadius)
                 continue;
 
             //y축 범위 제한
@@ -71,13 +71,13 @@ public static class PlayerAttackCommon
             //방향이 같은지 검사
             //diff가 양수면 몬스터가 오른쪽, 음수면 몬스터가 왼쪽에 있다.
             //아래 결과가 음수면 캐릭터가 바라보는 방향에는 해당 몬스터가 없다.
-            float dotValue = diff.x * lookDir.x;//내적 값
-            Debug.Log(diff.x+" "+lookDir.x+ " "+lookDir.y+" "+lookDir.z);
+            float dotValue = diff.x * lookDir.x+ diff.z * lookDir.z;//내적 값
             if (dotValue < 0)
                 continue;
-            
+
             //사잇각이 너무 높으면 근처 몬스터로 보지 않는다.
-            float cos = dotValue / curDist;
+            float lookDirLength = lookDir.x * lookDir.x + lookDir.z * lookDir.z;
+            float cos = dotValue / (Mathf.Sqrt(curDist)*Mathf.Sqrt(lookDirLength));
             float theta = Mathf.Abs(Mathf.Acos(cos));
          
             if (theta > limitAngle)
@@ -96,15 +96,16 @@ public static class PlayerAttackCommon
     /// 플레이어로부터 범위내에 있는 몬스터들 반환
     /// 이때 플레이어가 바라보는 방향 미고려
     /// </summary>
-    public static List<GameObject> TargetMonstersInRange(Vector3 playerPos, float limitXDist, float limitYDist, float countslimit)
+    public static List<GameObject> TargetMonstersInRange(Vector3 playerPos, float limitRadius, float limitYDist, float countslimit)
     {
         List<GameObject> mobInArea = new List<GameObject>();
         foreach (var mob in MonsterSpawn.activeMonster)
         {
             //거리 검사
-            float curDist = (mob.transform.position - playerPos).magnitude;
-            //X축 범위 제한
-            if (curDist > limitXDist)
+            Vector3 diff = mob.transform.position - playerPos;
+            float curDist = diff.x*diff.x + diff.z*diff.z;
+            //반지름 범위 제한
+            if (curDist > limitRadius*limitRadius)
                 continue;
 
             //y축 범위 제한
@@ -212,12 +213,12 @@ public static class PlayerAttackCommon
         int minDamage = (int)(PlayerInfo.attackPower * PlayerInfo.workmanship * 0.01);
         int damage = (Random.Range(minDamage, maxDamage)*skillDamage)/100;
 
-        if (PlayerAttackCommon.IsCritical())
+        if (IsCritical())
         {
             damage = (damage * PlayerInfo.criticalDamage) / 100;
-            PlayerAttackCommon.ShowCriticalDamageAsSkin(damage, collision.gameObject, hitNum);
+            ShowCriticalDamageAsSkin(damage, collision.gameObject, hitNum);
         }
-        else PlayerAttackCommon.ShowDamageAsSkin(damage, collision.gameObject, hitNum);
+        else ShowDamageAsSkin(damage, collision.gameObject, hitNum);
 
         //몬스터가 데미지를 입음
         collision.gameObject.GetComponent<MonsterInfo>().DecreaseMonsterHP(damage);
@@ -323,9 +324,10 @@ public static class PlayerAttackCommon
         Vector3 maxPlayer = playerArea.max;
         Vector3 minPlayer = playerArea.min;
 
-        //2D이므로 x,y좌표만 비교
+        //3D이므로 x,y,z좌표 비교
         bool isXCollide = false;
         bool isYCollide = false;
+        bool isZCollide = false;
 
         //충돌 검사
         if (maxMob.x > minPlayer.x && minMob.x < maxPlayer.x)
@@ -336,9 +338,13 @@ public static class PlayerAttackCommon
         {
             isYCollide = true;
         }
+        if (maxMob.z > minPlayer.z && minMob.z < maxPlayer.z)
+        {
+            isZCollide = true;
+        }
 
         //충돌함
-        if (isXCollide && isYCollide)
+        if (isXCollide && isYCollide && isZCollide)
         {
             return true;
         }
