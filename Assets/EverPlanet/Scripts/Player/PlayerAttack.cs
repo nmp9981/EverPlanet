@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("이펙트")]
     [SerializeField] GameObject fireDemonEffect;
     [SerializeField] GameObject cloudEffect;
+    [SerializeField] GameObject pushEffect;
 
     /// <summary>
     /// 일반 공격
@@ -202,11 +203,16 @@ public class PlayerAttack : MonoBehaviour
     /// 밀격
     /// </summary>
     /// <returns></returns>
-    public void PushAttack()
+    public IEnumerator PushAttack()
     {
         Vector3 lookDir = playerDirObjectTransform.position-transform.position;
         List<GameObject> mobList = PlayerAttackCommon.TargetMonstersFromPlayer(lookDir,gameObject.transform.position,3,2,10);
         
+        //이펙트
+        GameObject push = Instantiate(pushEffect);
+        pushEffect.transform.position = playerDirObjectTransform.position;
+        pushEffect.transform.LookAt(-lookDir);
+
         foreach (GameObject mobObj in mobList)
         {
             Rigidbody rb = mobObj.GetComponent<Rigidbody>();
@@ -216,5 +222,7 @@ public class PlayerAttack : MonoBehaviour
             rb.AddForce(forcePower,ForceMode.Impulse);
             PlayerAttackCommon.PlayerToMonsterAttack(collider,100,2);
         }
+        yield return new WaitForSeconds(2f);
+        Destroy(push);
     }
 }

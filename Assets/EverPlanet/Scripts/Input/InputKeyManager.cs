@@ -82,7 +82,7 @@ public class InputKeyManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))//¹Ð°Ý
         {
-            playerAttack.PushAttack();
+            StartCoroutine(playerAttack.PushAttack());
         }
     }
 
