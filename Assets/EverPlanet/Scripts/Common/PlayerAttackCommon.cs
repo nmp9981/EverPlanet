@@ -209,6 +209,10 @@ public static class PlayerAttackCommon
     /// </summary>
     public static void PlayerToMonsterAttack(Collider collision, int skillDamage, int hitNum)
     {
+        var mob = collision.gameObject.GetComponent<MonsterInfo>();
+        if(mob==null) return;
+        if (mob.mobCurrentHP <= 0) return;
+
         int maxDamage = (int)PlayerInfo.attackPower;
         int minDamage = (int)(PlayerInfo.attackPower * PlayerInfo.workmanship * 0.01);
         int damage = (Random.Range(minDamage, maxDamage)*skillDamage)/100;
@@ -221,7 +225,7 @@ public static class PlayerAttackCommon
         else ShowDamageAsSkin(damage, collision.gameObject, hitNum);
 
         //몬스터가 데미지를 입음
-        collision.gameObject.GetComponent<MonsterInfo>().DecreaseMonsterHP(damage);
+        mob.DecreaseMonsterHP(damage);
     }
 
     /// <summary>

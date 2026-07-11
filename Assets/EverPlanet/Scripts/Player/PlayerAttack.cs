@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -12,6 +11,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject fireDemonEffect;
     [SerializeField] GameObject cloudEffect;
     [SerializeField] GameObject pushEffect;
+
+    [Header("스킬")]
+    [SerializeField] GameObject knifeStormObj;
 
     /// <summary>
     /// 일반 공격
@@ -224,5 +226,31 @@ public class PlayerAttack : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
         Destroy(push);
+    }
+    /// <summary>
+    /// 칼날 폭풍
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator KnifeStorm()
+    {
+        //칼날 오브젝트 생성
+        GameObject storm = Instantiate(knifeStormObj);
+        storm.transform.position = transform.position;
+
+        //중심 오브젝트 설정
+        ObjectRotation rot = storm.GetComponent<ObjectRotation>();
+        rot.centerObj = this.gameObject;
+
+        //칼날 옵션 세팅
+        for(int idx = 0; idx < 3; idx++)
+        {
+            Sward sward = storm.transform.GetChild(idx).GetComponent<Sward>();
+            sward.skillDamage = 80;
+            sward.maxTarget = 10000;
+        }
+
+        //지속 시간 이후 파괴
+        yield return new WaitForSeconds(15f);
+        Destroy(storm);
     }
 }

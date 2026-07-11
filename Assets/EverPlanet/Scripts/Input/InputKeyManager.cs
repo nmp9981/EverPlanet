@@ -84,6 +84,10 @@ public class InputKeyManager : MonoBehaviour
         {
             StartCoroutine(playerAttack.PushAttack());
         }
+        if (Input.GetKeyDown(KeyCode.G))//Ä®³¯ ÆøÇ³
+        {
+            StartCoroutine(playerAttack.KnifeStorm());
+        }
     }
 
     /// <summary>
