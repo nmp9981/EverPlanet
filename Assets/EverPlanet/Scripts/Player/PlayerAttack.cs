@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -252,5 +253,28 @@ public class PlayerAttack : MonoBehaviour
         //지속 시간 이후 파괴
         yield return new WaitForSeconds(15f);
         Destroy(storm);
+    }
+
+    /// <summary>
+    /// 다단 히트 어택
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator MultiHitAttack(int hit)
+    {
+        //공격 대상 몬스터
+        Vector3 lookDir = playerDirObjectTransform.position - transform.position;
+        GameObject target = PlayerAttackCommon.NearMonserFromPlayer(lookDir, transform.position,3);
+
+        //타겟이 있는가?
+        if (target != null)
+        {
+            //N회 공격
+            Collider tarGetCol = target.GetComponent<Collider>();
+            for (int idx = 0; idx < hit; idx++)
+            {
+                PlayerAttackCommon.PlayerToMonsterAttack(tarGetCol, 100, idx + 2);
+                yield return new WaitForSeconds(0.15f);
+            }
+        }
     }
 }

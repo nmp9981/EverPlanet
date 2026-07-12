@@ -88,6 +88,10 @@ public class InputKeyManager : MonoBehaviour
         {
             StartCoroutine(playerAttack.KnifeStorm());
         }
+        if (Input.GetKeyDown(KeyCode.H))//다단 히트
+        {
+            StartCoroutine(playerAttack.MultiHitAttack(8));
+        }
     }
 
     /// <summary>

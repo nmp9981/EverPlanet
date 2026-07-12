@@ -16,22 +16,29 @@ public static class PlayerAttackCommon
         float dist = float.MaxValue;
         foreach (var mob in MonsterSpawn.activeMonster)
         {
+            //몬스터 없음
+            if (mob == null) continue;
+            if (!mob.activeSelf) continue;
+
             //방향이 같은지 검사
             Vector3 diff = mob.transform.position - playerPos;
-            //diff가 양수면 몬스터가 오른쪽, 음수면 몬스터가 왼쪽에 있다.
-            //아래 결과가 음수면 캐릭터가 바라보는 방향에는 해당 몬스터가 없다.
-            float dotValue = diff.x * lookDir.x;//내적 값
-            if (dotValue < 0)
-                continue;
 
             //거리 검사
             float curDist = diff.magnitude;
+            float curDistXZ = diff.x * diff.x + diff.z * diff.z;
             //사거리 밖
             if (curDist > limitDist)
                 continue;
 
+            //diff가 양수면 몬스터가 오른쪽, 음수면 몬스터가 왼쪽에 있다.
+            //아래 결과가 음수면 캐릭터가 바라보는 방향에는 해당 몬스터가 없다.
+            float dotValue = diff.x * lookDir.x + diff.z * lookDir.z;//내적 값
+            if (dotValue < 0)
+                continue;
+
             //사잇각이 너무 높으면 근처 몬스터로 보지 않는다.
-            float cos = dotValue / curDist;
+            float lookDirLength = lookDir.x * lookDir.x + lookDir.z * lookDir.z;
+            float cos = dotValue / (Mathf.Sqrt(lookDirLength)*Mathf.Sqrt(curDistXZ));
             float theta = Mathf.Abs(Mathf.Acos(cos));
             if (theta > limitAngle)
                 continue;
