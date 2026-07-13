@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class PlayerAttackCommon
@@ -217,8 +218,12 @@ public static class PlayerAttackCommon
     public static void PlayerToMonsterAttack(Collider collision, int skillDamage, int hitNum)
     {
         var mob = collision.gameObject.GetComponent<MonsterInfo>();
-        if(mob==null) return;
+        var mobMove = collision.gameObject.GetComponent<MonsterMove>();
+        if (mob==null) return;
+        if(mobMove==null) return;
         if (mob.mobCurrentHP <= 0) return;
+
+        mobMove.isAggro = true;
 
         int maxDamage = (int)PlayerInfo.attackPower;
         int minDamage = (int)(PlayerInfo.attackPower * PlayerInfo.workmanship * 0.01);
