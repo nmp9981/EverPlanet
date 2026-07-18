@@ -1,6 +1,16 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum MonsterMoveType
+{
+    Stop,
+    Horizontal,
+    Vertical,
+    Circle,
+    Count
+}
 
 public class MonsterMove : MonoBehaviour
 {
@@ -10,6 +20,13 @@ public class MonsterMove : MonoBehaviour
     public GameObject HPBarBack;
     [SerializeField]
     public TextMeshProUGUI mobInfo;
+
+    //몬스터 이동 유형
+    [SerializeField]
+    public MonsterMoveType moveType;
+
+    //몬스터 크기
+    public Bounds mobSize;
 
     [SerializeField]
     public bool isAggro;//어그로 여부
@@ -24,13 +41,18 @@ public class MonsterMove : MonoBehaviour
         isAggro = false;
         target = GameObject.Find("Player");
     }
+    private void OnEnable()
+    {
+        mobSize = target.GetComponent<BoxCollider>().bounds;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        float distanceToPlayer = Vector3.Distance(transform.position, target.gameObject.transform.position);
         MonsterMoving();
-        PlayerChaser();
-        MoveMosterUI();
+        PlayerChaser(distanceToPlayer);
+        MoveMosterUI(distanceToPlayer);
     }
 
     /// <summary>
@@ -40,20 +62,18 @@ public class MonsterMove : MonoBehaviour
     {
         if (isAggro) return;
 
+        //각 유형별 이동
     }
 
     /// <summary>
     /// 플레이어 추적
     /// </summary>
-    void PlayerChaser()
+    void PlayerChaser(float dist)
     {
         if (isAggro)
         {
-            // 몬스터와 플레이어 사이의 거리 계산
-            float distanceToPlayer = Vector3.Distance(transform.position, target.gameObject.transform.position);
-
             //사거리 내
-            if (distanceToPlayer < chaseRange)
+            if (dist < chaseRange)
             {
                 // 플레이어 방향으로 이동
                 transform.position = Vector3.MoveTowards(transform.position, target.gameObject.transform.position, speed * Time.deltaTime);
@@ -64,12 +84,21 @@ public class MonsterMove : MonoBehaviour
     /// <summary>
     /// 몬스터 UI 이동
     /// </summary>
-    void MoveMosterUI()
+    void MoveMosterUI(float dist)
     {
         //HPBar.gameObject.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, 0.7f, 0));
         //HPBarBack.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, 0.7f, 0));
-        mobInfo.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, 0.25f, 0));
+        mobInfo.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, mobSize.size.y*0.5f+1, 0));
 
-        mobInfo.text = "[" + 80 + "] Mushroom";
+        //사거리 내
+        if (dist < chaseRange)
+        {
+            // 몬스터 정보 보이게
+            mobInfo.text = "[" + 80 + "] Mushroom";
+        }
+        else
+        {
+            mobInfo.text = string.Empty;
+        }
     }
 }
