@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] List<Transform> spawnPosList = new List<Transform>();
     //맵에 활성화된 몬스터
     public static List<GameObject> activeMonster = new List<GameObject>();
-
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,14 +22,19 @@ public class MonsterSpawn : MonoBehaviour
     /// </summary>
     void SpawnFlow()
     {
+        Array moveTypeArray = Enum.GetValues(typeof(MonsterMoveType));
         foreach (var trans in spawnPosList)
         {
-            int ranCount = Random.Range(4, 7);
+            int ranCount = UnityEngine.Random.Range(4, 7);
             for (int i = 0; i < ranCount; i++)
             {
-                float xRan = Random.Range(-3, 3);
-                float zRan = Random.Range(-3, 3);
+                float xRan = UnityEngine.Random.Range(-3, 3);
+                float zRan = UnityEngine.Random.Range(-3, 3);
+                int moveRanNum = UnityEngine.Random.Range(0,(int)MonsterMoveType.Count);
                 GameObject mob = monsterFulling.MakeObj(0);
+                MonsterMove mobMove = mob.GetComponent<MonsterMove>();
+
+                mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
                 mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);
                 activeMonster.Add(mob);
             }

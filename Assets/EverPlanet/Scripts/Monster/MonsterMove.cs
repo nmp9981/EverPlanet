@@ -24,9 +24,17 @@ public class MonsterMove : MonoBehaviour
     //몬스터 이동 유형
     [SerializeField]
     public MonsterMoveType moveType;
+    //몬스터 스폰 지점
+    public Vector3 spawnPosition;
+    private float diameter;
 
     //몬스터 크기
     public Bounds mobSize;
+
+    //방향 전환 타임
+    private float curLineTime = 0;
+    private float maxLineTime = 3;
+    private float moveDir = 1;
 
     [SerializeField]
     public bool isAggro;//어그로 여부
@@ -53,6 +61,7 @@ public class MonsterMove : MonoBehaviour
         MonsterMoving();
         PlayerChaser(distanceToPlayer);
         MoveMosterUI(distanceToPlayer);
+        TimeFlow();
     }
 
     /// <summary>
@@ -62,7 +71,32 @@ public class MonsterMove : MonoBehaviour
     {
         if (isAggro) return;
 
-        //각 유형별 이동
+        //각 유형별
+        switch (moveType)
+        {
+            case MonsterMoveType.Stop:
+                break;
+            case MonsterMoveType.Horizontal:
+                if (curLineTime > maxLineTime)
+                {
+                    moveDir *= -1;
+                    curLineTime = 0;
+                }else this.gameObject.transform.position += Vector3.left * Time.deltaTime * speed * moveDir;
+                break;
+            case MonsterMoveType.Vertical:
+                if (curLineTime > maxLineTime)
+                {
+                    moveDir *= -1;
+                    curLineTime = 0;
+                }
+                else this.gameObject.transform.position += Vector3.forward * Time.deltaTime * speed * moveDir;
+                break;
+            case MonsterMoveType.Circle:
+                MoveCircleOrbit();
+                break;
+            default:
+                break;
+        }
     }
 
     /// <summary>
@@ -100,5 +134,29 @@ public class MonsterMove : MonoBehaviour
         {
             mobInfo.text = string.Empty;
         }
+    }
+
+    /// <summary>
+    /// 반지름 설정
+    /// </summary>
+    public void SetDiameter()
+    {
+        diameter = (this.gameObject.transform.position - spawnPosition).magnitude;
+    }
+
+    /// <summary>
+    /// 원궤도 이동
+    /// </summary>
+    void MoveCircleOrbit()
+    {
+        
+    }
+
+    /// <summary>
+    /// 시간 흐름
+    /// </summary>
+    void TimeFlow()
+    {
+        curLineTime += Time.deltaTime;
     }
 }
