@@ -5,6 +5,8 @@ public class MonsterSpawn : MonoBehaviour
 {
     //몬스터 풀링
     [SerializeField] MonsterFulling monsterFulling;
+    //스폰 지점
+    [SerializeField] List<Transform> spawnPosList = new List<Transform>();
     //맵에 활성화된 몬스터
     public static List<GameObject> activeMonster = new List<GameObject>();
 
@@ -19,13 +21,17 @@ public class MonsterSpawn : MonoBehaviour
     /// </summary>
     void SpawnFlow()
     {
-        for(int i = 0; i < 36; i++)
+        foreach (var trans in spawnPosList)
         {
-            float xRan = Random.Range(-12, 12);
-            float zRan = Random.Range(-12, 12);
-            GameObject mob = monsterFulling.MakeObj(0);
-            mob.transform.position = new Vector3(xRan, 0f, zRan);
-            activeMonster.Add(mob);
+            int ranCount = Random.Range(4, 7);
+            for (int i = 0; i < ranCount; i++)
+            {
+                float xRan = Random.Range(-3, 3);
+                float zRan = Random.Range(-3, 3);
+                GameObject mob = monsterFulling.MakeObj(0);
+                mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);
+                activeMonster.Add(mob);
+            }
         }
     }
 }
