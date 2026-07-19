@@ -134,7 +134,7 @@ public class MonsterMove : MonoBehaviour
         if (dist < chaseRange)
         {
             // 몬스터 정보 보이게
-            mobInfo.text = "[" + 80 + "] Mushroom";
+            mobInfo.text = "[" +80 + "] Mushroom";
         }
         else
         {

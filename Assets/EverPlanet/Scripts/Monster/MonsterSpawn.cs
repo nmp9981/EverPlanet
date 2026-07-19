@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterSpawn : MonoBehaviour
@@ -40,5 +41,10 @@ public class MonsterSpawn : MonoBehaviour
                 activeMonster.Add(mob);
             }
         }
+        //º¸½º
+        GameObject bossMob = monsterFulling.MakeObj(2);
+        MonsterMove bossMobMove = bossMob.GetComponent<MonsterMove>();
+        bossMobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(0);
+        bossMob.transform.position = spawnPosList[spawnPosList.Count-1].position;
     }
 }
