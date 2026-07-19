@@ -3,8 +3,8 @@ using UnityEngine;
 public class MonsterFulling : MonoBehaviour
 {
     //프리팹 준비
-    const int blockMaxCount = 50;
-    const int blockKinds = 2;
+    const int blockMaxCount = 300;
+    const int blockKinds = 3;
     public GameObject[] blockPrefabs;
 
     //오브젝트 배열
@@ -17,7 +17,7 @@ public class MonsterFulling : MonoBehaviour
         {
              new GameObject[blockMaxCount],
              new GameObject[blockMaxCount],
-
+             new GameObject[blockMaxCount]
         };
         Generate();
     }
