@@ -33,6 +33,7 @@ public class MonsterSpawn : MonoBehaviour
                 int moveRanNum = UnityEngine.Random.Range(0,(int)MonsterMoveType.Count);
                 GameObject mob = monsterFulling.MakeObj(0);
                 MonsterMove mobMove = mob.GetComponent<MonsterMove>();
+                mobMove.SetDiameter();
 
                 mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
                 mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);

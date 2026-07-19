@@ -3,7 +3,7 @@ using UnityEngine;
 public class ObjectFulling : MonoBehaviour
 {
     //«¡∏Æ∆’ ¡ÿ∫Ò
-    const int blockMaxCount = 80;
+    const int blockMaxCount = 300;
     const int blockKinds = 9;
     public GameObject[] blockPrefabs;
 

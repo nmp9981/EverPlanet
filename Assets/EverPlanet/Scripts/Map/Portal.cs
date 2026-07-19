@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.CompareTag(playerString))
         {
-            playerObj.gameObject.transform.position = mapManage.portalList[nextNum].transform.position+0.5f*Vector3.up;
+            playerObj.gameObject.transform.position = mapManage.portalList[nextNum].transform.position+0.5f*Vector3.up+2*Vector3.forward;
         }
     }
 }

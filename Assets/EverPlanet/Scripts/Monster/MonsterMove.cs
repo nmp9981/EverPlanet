@@ -36,6 +36,10 @@ public class MonsterMove : MonoBehaviour
     private float maxLineTime = 3;
     private float moveDir = 1;
 
+    //각도 이동
+    private float prevAngle = 0;
+    private float nextAngle = 0;
+
     [SerializeField]
     public bool isAggro;//어그로 여부
     [SerializeField]
@@ -47,6 +51,8 @@ public class MonsterMove : MonoBehaviour
     private void Awake()
     {
         isAggro = false;
+        prevAngle = 0;
+        nextAngle = Time.deltaTime;
         target = GameObject.Find("Player");
     }
     private void OnEnable()
@@ -149,7 +155,9 @@ public class MonsterMove : MonoBehaviour
     /// </summary>
     void MoveCircleOrbit()
     {
-        
+        float nextXPos = diameter*(Mathf.Cos(nextAngle)-Mathf.Cos(prevAngle));
+        float nextZPos = diameter * (Mathf.Sin(nextAngle) - Mathf.Sin(prevAngle));
+        this.gameObject.transform.position += new Vector3(nextXPos, 0, nextZPos);
     }
 
     /// <summary>
@@ -158,5 +166,7 @@ public class MonsterMove : MonoBehaviour
     void TimeFlow()
     {
         curLineTime += Time.deltaTime;
+        prevAngle = nextAngle;
+        nextAngle += Time.deltaTime;
     }
 }
