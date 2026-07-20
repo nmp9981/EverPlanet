@@ -19,13 +19,16 @@ public class MonsterInfo : MonoBehaviour
     //보스 여부
     public bool isBoss;
 
+    //UI
     [SerializeField] SpriteRenderer hpBarImage;
+    [SerializeField] PlayerInfoUpdate playerInfo;
 
     /// <summary>
     /// HP바 세팅
     /// </summary>
-    protected void InitHPSet()
+    protected void InitHP_UISet()
     {
+        playerInfo = GameObject.Find("Player").GetComponent<PlayerInfoUpdate>();
         mobCurrentHP = mobMaxHP;
         if (hpBarImage != null) hpBarImage.gameObject.transform.localScale = new Vector3(1, 1, 1);
     }
@@ -53,6 +56,7 @@ public class MonsterInfo : MonoBehaviour
     /// </summary>
     public void MonsterDie()
     {
+        playerInfo.GetExp(mobExp);
         MonsterSpawn.activeMonster.Remove(this.gameObject);
         this.gameObject.SetActive(false);
     }

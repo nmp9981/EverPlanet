@@ -57,7 +57,7 @@ public class MonsterMove : MonsterInfo
     }
     private void OnEnable()
     {
-        InitHPSet();
+        InitHP_UISet();
         mobSize = target.GetComponent<BoxCollider>().bounds;
     }
 
