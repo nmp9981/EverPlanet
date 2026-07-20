@@ -29,13 +29,14 @@ public class MonsterSpawn : MonoBehaviour
         foreach (var trans in spawnPosList)
         {
             int ranCount = UnityEngine.Random.Range(4, 7);
+            int mobRannum = UnityEngine.Random.Range(0,2);
             for (int i = 0; i < ranCount; i++)
             {
                 float xRan = UnityEngine.Random.Range(-3, 3);
                 float zRan = UnityEngine.Random.Range(-3, 3);
                 int moveRanNum = UnityEngine.Random.Range(0,(int)MonsterMoveType.Count);
                 
-                GameObject mob = monsterFulling.MakeObj(0);
+                GameObject mob = monsterFulling.MakeObj(mobRannum);
                 if (mob != null)
                 {
                     MonsterMove mobMove = mob.GetComponent<MonsterMove>();

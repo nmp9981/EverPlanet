@@ -13,22 +13,23 @@ public class MonsterInfo : MonoBehaviour
     public int mobAttack;//몬스터 공격력
     public int mobDefence;//몬스터 방어력
 
+    protected string MobName => mobName;
+    protected int MobLv => mobLv;
+
     //보스 여부
     public bool isBoss;
 
     [SerializeField] SpriteRenderer hpBarImage;
 
-    private void OnEnable()
+    /// <summary>
+    /// HP바 세팅
+    /// </summary>
+    protected void InitHPSet()
     {
         mobCurrentHP = mobMaxHP;
-        if(hpBarImage!=null) hpBarImage.gameObject.transform.localScale = new Vector3(1,1,1);
+        if (hpBarImage != null) hpBarImage.gameObject.transform.localScale = new Vector3(1, 1, 1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// 몬스터 HP 감소

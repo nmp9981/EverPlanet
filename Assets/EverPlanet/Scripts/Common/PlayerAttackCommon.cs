@@ -217,12 +217,11 @@ public static class PlayerAttackCommon
     /// </summary>
     public static void PlayerToMonsterAttack(Collider collision, int skillDamage, int hitNum)
     {
-        var mob = collision.gameObject.GetComponent<MonsterInfo>();
+        //var mob = collision.gameObject.GetComponent<MonsterInfo>();
         var mobMove = collision.gameObject.GetComponent<MonsterMove>();
-        if (mob==null) return;
+        //if (mob==null) return;
         if(mobMove==null) return;
-        if (mob.mobCurrentHP <= 0) return;
-
+        if (mobMove.mobCurrentHP <= 0) return;
         mobMove.isAggro = true;
 
         int maxDamage = (int)PlayerInfo.attackPower;
@@ -237,7 +236,7 @@ public static class PlayerAttackCommon
         else ShowDamageAsSkin(damage, collision.gameObject, hitNum);
 
         //몬스터가 데미지를 입음
-        mob.DecreaseMonsterHP(damage);
+        mobMove.DecreaseMonsterHP(damage);
     }
 
     /// <summary>

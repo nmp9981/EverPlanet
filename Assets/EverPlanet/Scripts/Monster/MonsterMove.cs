@@ -12,7 +12,7 @@ public enum MonsterMoveType
     Count
 }
 
-public class MonsterMove : MonoBehaviour
+public class MonsterMove : MonsterInfo
 {
     [SerializeField]
     public Image HPBar;
@@ -57,6 +57,7 @@ public class MonsterMove : MonoBehaviour
     }
     private void OnEnable()
     {
+        InitHPSet();
         mobSize = target.GetComponent<BoxCollider>().bounds;
     }
 
@@ -126,15 +127,13 @@ public class MonsterMove : MonoBehaviour
     /// </summary>
     void MoveMosterUI(float dist)
     {
-        //HPBar.gameObject.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, 0.7f, 0));
-        //HPBarBack.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, 0.7f, 0));
         mobInfo.transform.position = Camera.main.WorldToScreenPoint(this.gameObject.transform.position + new Vector3(0, mobSize.size.y*0.5f+1, 0));
 
         //사거리 내
         if (dist < chaseRange)
         {
             // 몬스터 정보 보이게
-            mobInfo.text = "[" +80 + "] Mushroom";
+            mobInfo.text = $"[{MobLv}] {MobName}";
         }
         else
         {

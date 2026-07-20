@@ -18,11 +18,6 @@ public class BossHPBar : MonoBehaviour {
     float curTime=0.1f;
     float inspectTime = 0.15f;
 
-    void Awake()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -45,8 +40,6 @@ public class BossHPBar : MonoBehaviour {
         foreach (var mob in MonsterSpawn.activeBossMonster)
         {
             Vector3 mobToPlayer = mob.gameObject.transform.position-playerInfo.gameObject.transform.position;
-            Debug.Log(playerInfo.gameObject.transform.position.x+" "+ playerInfo.gameObject.transform.position.z+" // "
-                + mob.gameObject.transform.position.x+" "+ mob.gameObject.transform.position.z);
             float dist2 = mobToPlayer.x * mobToPlayer.x + mobToPlayer.z * mobToPlayer.z;
 
             if (dist2 < viewLimitDist2 && dist2<closestDist)
@@ -62,7 +55,7 @@ public class BossHPBar : MonoBehaviour {
     /// </summary>
     void ShowBossHP(MonsterInfo mobInfo)
     {
-        if(mobInfo == null)
+        if(mobInfo == null || mobInfo.mobCurrentHP<=0)
         {
             bossHPObj.SetActive(false);
             return;
