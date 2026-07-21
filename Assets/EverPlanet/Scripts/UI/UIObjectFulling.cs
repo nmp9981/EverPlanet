@@ -11,6 +11,9 @@ public class UIObjectFulling : MonoBehaviour
     GameObject[][] blocks;
     GameObject[] targetPool;
 
+    //기준 오브젝트
+    Transform canvas;
+
     void Awake()
     {
         blocks = new GameObject[blockKinds][]
@@ -18,15 +21,18 @@ public class UIObjectFulling : MonoBehaviour
              new GameObject[blockMaxCount]
         };
         Generate();
+
     }
     void Generate()
     {
+        canvas = GameObject.Find("Canvas").transform;
         //블록
         for (int i = 0; i < blockKinds; i++)
         {
             for (int j = 0; j < blockMaxCount; j++)
             {
                 blocks[i][j] = Instantiate(blockPrefabs[i]);
+                blocks[i][j].transform.SetParent(canvas);
                 blocks[i][j].SetActive(false);
             }
         }

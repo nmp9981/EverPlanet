@@ -10,7 +10,7 @@ public class PlayerXPUI : MonoBehaviour
     
     void Update()
     {
-        this.gameObject.transform.position += Time.deltaTime * Vector3.up;
+        this.gameObject.transform.position += Time.deltaTime * Vector3.up*80;
 
         OffXPUI();
         curTime += Time.deltaTime;
@@ -22,8 +22,9 @@ public class PlayerXPUI : MonoBehaviour
     public void SetXP(int xp)
     {
         GameObject player = GameObject.Find("Player");
-        this.gameObject.transform.position = Camera.main.WorldToScreenPoint(player.transform.position)+Vector3.up;
+        this.gameObject.transform.position = Camera.main.WorldToScreenPoint(player.transform.position)+Vector3.up*100;
         xpText.text = $"XP {xp}";
+        curTime = 0;
     }
 
     /// <summary>
