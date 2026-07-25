@@ -35,6 +35,15 @@ public class PlayerInfoUpdate : MonoBehaviour
     }
 
     /// <summary>
+    /// MP 감소
+    /// </summary>
+    public void DecreasePlayerMP(int amount)
+    {
+        PlayerInfo.curMP = Mathf.Max(0, PlayerInfo.curMP - amount);
+        _playerUI.UpdatePlayerMpInfo();
+    }
+
+    /// <summary>
     /// 레벨 업
     /// </summary>
     /// <param name="amount"></param>

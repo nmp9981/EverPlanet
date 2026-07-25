@@ -9,6 +9,7 @@ public class InputKeyManager : MonoBehaviour
     //플레이어 조작
     [SerializeField] PlayerMove playerMove;
     [SerializeField] PlayerAttack playerAttack;
+    [SerializeField] PlayerInfoUpdate playerInfoUpdate;
 
     //타이머
     float currentTime = 0;
@@ -46,6 +47,7 @@ public class InputKeyManager : MonoBehaviour
             {
                 currentTime = 0;
                 playerAttack.GeneralAttack();
+                playerInfoUpdate.DecreasePlayerMP(0);
             }
         }
         if (Input.GetKeyDown(KeyCode.Z))//휘두르기X
@@ -58,14 +60,17 @@ public class InputKeyManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X))//트리플스로우
         {
+            playerInfoUpdate.DecreasePlayerMP(17);
             StartCoroutine(playerAttack.ThrowAttack());
         }
         if (Input.GetKeyDown(KeyCode.C))//관통기
         {
+            playerInfoUpdate.DecreasePlayerMP(30);
             StartCoroutine(playerAttack.Penetration());
         }
         if (Input.GetKeyDown(KeyCode.V))//광역기, 범위기
         {
+            playerInfoUpdate.DecreasePlayerMP(80);
             StartCoroutine(playerAttack.Meteo());
         }
         if (Input.GetKeyDown(KeyCode.B))//찌르기
@@ -74,22 +79,27 @@ public class InputKeyManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.N))//폭탄 공격
         {
+            playerInfoUpdate.DecreasePlayerMP(50);
             StartCoroutine(playerAttack.BoomAttack());
         }
         if (Input.GetKeyDown(KeyCode.M))//설치기
         {
+            playerInfoUpdate.DecreasePlayerMP(180);
             StartCoroutine(playerAttack.InstallAttack());
         }
         if (Input.GetKeyDown(KeyCode.F))//밀격
         {
+            playerInfoUpdate.DecreasePlayerMP(15);
             StartCoroutine(playerAttack.PushAttack());
         }
         if (Input.GetKeyDown(KeyCode.G))//칼날 폭풍
         {
+            playerInfoUpdate.DecreasePlayerMP(55);
             StartCoroutine(playerAttack.KnifeStorm());
         }
         if (Input.GetKeyDown(KeyCode.H))//다단 히트
         {
+            playerInfoUpdate.DecreasePlayerMP(27);
             StartCoroutine(playerAttack.MultiHitAttack(8));
         }
     }
