@@ -168,4 +168,18 @@ public class MonsterMove : MonsterInfo
         prevAngle = nextAngle;
         nextAngle += Time.deltaTime;
     }
+
+    /// <summary>
+    /// ÇÇ°Ý
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            long damageValue = Random.Range(mobAttack*90/100, mobAttack*110/100);
+            other.GetComponent<PlayerInfoUpdate>().DecreasePlayerHP((int)damageValue);
+            PlayerAttackCommon.ShowDamageAsSkin(damageValue,other.gameObject); 
+        }
+    }
 }

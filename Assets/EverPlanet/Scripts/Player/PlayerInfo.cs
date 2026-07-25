@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
@@ -13,6 +14,12 @@ public class PlayerInfo : MonoBehaviour
     public static float workmanship = 30;//숙련도
     public static float criticalRate = 50;//크리티컬 확률
     public static int criticalDamage = 200;//크리티컬 데미지
+
+    //HP,MP 관련
+    public static int curHP = 0;
+    public static int maxHP = 11111;
+    public static int curMP = 0;
+    public static int maxMP = 7700;
 
     //경험치 관련
     public static int curExp = 0;//현재 경험치
@@ -36,5 +43,7 @@ public class PlayerInfo : MonoBehaviour
     void SetInitInfo()
     {
         curExp = 0;
+        curHP = maxHP;
+        curMP = maxMP;
     }
 }

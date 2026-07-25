@@ -13,7 +13,7 @@ public class PlayerInfoUpdate : MonoBehaviour
     {
         //경험치 획득
         PlayerInfo.curExp += amount;
-        _playerUI.UpdatePlayerInfo();
+        _playerUI.UpdatePlayerExpInfo();
 
         //경험치 UI
         PlayerXPUI playerXPUI = _uiFulling.MakeObj(0).GetComponent<PlayerXPUI>();
@@ -24,6 +24,16 @@ public class PlayerInfoUpdate : MonoBehaviour
             LevelUP();
         }
     }
+
+    /// <summary>
+    /// HP 감소
+    /// </summary>
+    public void DecreasePlayerHP(int amount)
+    {
+        PlayerInfo.curHP = Mathf.Max(0, PlayerInfo.curHP - amount);
+        _playerUI.UpdatePlayerHpInfo();
+    }
+
     /// <summary>
     /// 레벨 업
     /// </summary>

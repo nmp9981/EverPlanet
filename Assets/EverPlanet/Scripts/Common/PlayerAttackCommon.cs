@@ -301,8 +301,8 @@ public static class PlayerAttackCommon
     {
         string damageString = Damage.ToString();
         float damageLength = DamageObjectFulling.DamageSkinInstance.hitDamageImage[0].bounds.size.x * damageString.Length;
-        Bounds bounds = playerPos.GetComponent<BoxCollider2D>().bounds;
-        Vector3 damageStartPos = bounds.center + Vector3.up * (bounds.size.y * 0.5f + 0.5f) + damageLength * Vector3.left * 0.25f;
+        Bounds bounds = playerPos.GetComponent<BoxCollider>().bounds;
+        Vector3 damageStartPos = bounds.center + Vector3.up * (bounds.size.y * 0.5f+1f) + damageLength * Vector3.left * 0.25f;
 
         for (int i = 0; i < damageString.Length; i++)
         {
