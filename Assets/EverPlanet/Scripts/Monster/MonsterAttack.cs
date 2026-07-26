@@ -7,6 +7,7 @@ public class MonsterAttack : MonoBehaviour
 
     [SerializeField] GameObject attackObj;//공격 투사체
     [SerializeField] GameObject attackRange;//공격 범위
+    [SerializeField] Transform targetPos;//타겟 범위
 
     private void OnEnable()
     {
@@ -15,6 +16,7 @@ public class MonsterAttack : MonoBehaviour
 
     private void Start()
     {
+        targetPos = GameObject.Find("Player").transform;
         StartCoroutine(MonsterToPlayerAttack());
     }
 
@@ -23,10 +25,19 @@ public class MonsterAttack : MonoBehaviour
     /// </summary>
     IEnumerator MonsterToPlayerAttack()
     {
-        //공격 범위 그리기
+        while (true)
+        {
+            //플레이어 감지
 
-
-        //투사체 발사
-
+            //3초뒤
+            yield return new WaitForSeconds(3f);
+            //투사체 발사
+            GameObject projectileObject = Instantiate(attackObj);
+            projectileObject.transform.position = this.gameObject.transform.position;
+            Vector3 dir = targetPos.position - this.gameObject.transform.position;
+            Vector3 diry0 = new Vector3(dir.x, 5, dir.z);
+            projectileObject.GetComponent<ProjectileMonster>().SetMagicDamage(monsterInfo.mobAttack);
+            projectileObject.GetComponent<Rigidbody>().AddForce(diry0, ForceMode.Impulse);
+        }
     }
 }
