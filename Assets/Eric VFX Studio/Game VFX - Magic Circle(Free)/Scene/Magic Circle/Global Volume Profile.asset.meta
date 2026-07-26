@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 07721ce2de6bff445935e700dd091849
-timeCreated: 1450410509
-licenseType: Store
+guid: d330dff666debdd4d8403d9f767af2df
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 11400000
   userData: 
-  assetBundleName: fx_textures_dust_materials.unity3d
+  assetBundleName: 
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 344984
   packageName: Free Game VFX - Magic Circle(URP)
   packageVersion: 1.01
-  assetPath: Assets/Eric VFX Studio/Resource/Materials/FX_smoke_02.mat
+  assetPath: Assets/Eric VFX Studio/Game VFX - Magic Circle(Free)/Scene/Magic Circle/Global
+    Volume Profile.asset
   uploadId: 844516

@@ -1,9 +1,7 @@
 fileFormatVersion: 2
-guid: ce47b9045a7a3214ca1379e605f54d9f
-ShaderImporter:
+guid: 72ed267a04bf396419f3230844bb29f1
+PrefabImporter:
   externalObjects: {}
-  defaultTextures: []
-  nonModifiableTextures: []
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -12,5 +10,5 @@ AssetOrigin:
   productId: 344984
   packageName: Free Game VFX - Magic Circle(URP)
   packageVersion: 1.01
-  assetPath: Assets/Eric VFX Studio/Resource/Shader/AdditiveFlow.shader
+  assetPath: Assets/Eric VFX Studio/Game VFX - Magic Circle(Free)/Prefabs/FX_MagicCircle_Icearrow03.prefab
   uploadId: 844516
