@@ -41,8 +41,6 @@ public class MonsterMove : MonsterInfo
     private float nextAngle = 0;
 
     [SerializeField]
-    public bool isAggro;//어그로 여부
-    [SerializeField]
     public GameObject target;//타겟
     public float speed = 2f;
     public float chaseRange = 10f; // 추적을 시작할 거리
@@ -50,7 +48,6 @@ public class MonsterMove : MonsterInfo
 
     private void Awake()
     {
-        isAggro = false;
         prevAngle = 0;
         nextAngle = Time.deltaTime;
         target = GameObject.Find("Player");

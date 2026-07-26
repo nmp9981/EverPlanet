@@ -8,7 +8,7 @@ public class ObjectRotation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = centerObj.transform.position;
+        transform.position = centerObj.transform.position+Vector3.up;
         transform.Rotate(0, rotateAngle, 0);
     }
 }

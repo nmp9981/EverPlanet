@@ -13,6 +13,9 @@ public class MonsterInfo : MonoBehaviour
     public int mobAttack;//몬스터 공격력
     public int mobDefence;//몬스터 방어력
 
+    [SerializeField]
+    public bool isAggro =false;//어그로 여부
+
     protected string MobName => mobName;
     protected int MobLv => mobLv;
 

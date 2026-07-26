@@ -236,7 +236,7 @@ public class PlayerAttack : MonoBehaviour
     {
         //칼날 오브젝트 생성
         GameObject storm = Instantiate(knifeStormObj);
-        storm.transform.position = transform.position;
+        storm.transform.position = transform.position+Vector3.up;
 
         //중심 오브젝트 설정
         ObjectRotation rot = storm.GetComponent<ObjectRotation>();
