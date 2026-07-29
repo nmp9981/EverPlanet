@@ -4,7 +4,15 @@ public class ProjectileMonster : MonoBehaviour
 {
     //마법 데미지
     private int magicDamage;
-    
+
+    //무적시간
+    private float spawnTime;
+
+    private void Awake()
+    {
+        spawnTime = Time.time;
+    }
+
     /// <summary>
     /// 마공 세팅
     /// </summary>
@@ -24,7 +32,10 @@ public class ProjectileMonster : MonoBehaviour
         }
         if (other.CompareTag("Land"))
         {
-            Destroy(this.gameObject);
+            if(Time.time -  spawnTime > 0.5f)//생성후 무적시간
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

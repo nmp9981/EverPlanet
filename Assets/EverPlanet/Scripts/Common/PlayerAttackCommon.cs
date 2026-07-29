@@ -219,10 +219,12 @@ public static class PlayerAttackCommon
     {
         //var mob = collision.gameObject.GetComponent<MonsterInfo>();
         var mobMove = collision.gameObject.GetComponent<MonsterMove>();
+        var mobAttack = collision.gameObject.GetComponent<MonsterAttack>();
         //if (mob==null) return;
-        if(mobMove==null) return;
+        if (mobMove==null) return;
         if (mobMove.mobCurrentHP <= 0) return;
         mobMove.isAggro = true;
+        mobAttack.StartMonsterAttackCoroutain();
 
         int maxDamage = (int)PlayerInfo.attackPower;
         int minDamage = (int)(PlayerInfo.attackPower * PlayerInfo.workmanship * 0.01);
