@@ -176,7 +176,8 @@ public class MonsterMove : MonsterInfo
         {
             long damageValue = Random.Range(mobAttack*90/100, mobAttack*110/100);
             other.GetComponent<PlayerInfoUpdate>().DecreasePlayerHP((int)damageValue);
-            PlayerAttackCommon.ShowDamageAsSkin(damageValue,other.gameObject); 
+            PlayerAttackCommon.ShowDamageAsHitSkin(damageValue,other.gameObject,InputKeyManager.orderHitNum);
+            InputKeyManager.orderHitNum += 1;
         }
     }
 }

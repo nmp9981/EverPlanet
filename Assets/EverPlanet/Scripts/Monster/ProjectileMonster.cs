@@ -27,7 +27,8 @@ public class ProjectileMonster : MonoBehaviour
         if (other.CompareTag("Player"))//플레이어 피격
         {
             other.GetComponent<PlayerInfoUpdate>().DecreasePlayerHP(magicDamage);
-            PlayerAttackCommon.ShowDamageAsSkin(magicDamage, other.gameObject);
+            PlayerAttackCommon.ShowDamageAsHitSkin(magicDamage, other.gameObject, InputKeyManager.orderHitNum);
+            InputKeyManager.orderHitNum += 1;
             Destroy(this.gameObject);
         }
         if (other.CompareTag("Land"))

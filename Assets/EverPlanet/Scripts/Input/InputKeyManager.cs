@@ -4,6 +4,7 @@ public class InputKeyManager : MonoBehaviour
 {
     //데미지 UI순서
     public static int orderSortNum { get; set; }
+    public static int orderHitNum { get; set; }
     public const int maxOrderSortNum = 99999999;
 
     //플레이어 조작
@@ -14,6 +15,9 @@ public class InputKeyManager : MonoBehaviour
     //타이머
     float currentTime = 0;
 
+    //데미지 시간 
+    float curDamageTime = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +25,8 @@ public class InputKeyManager : MonoBehaviour
         InputAttack();
 
         TimeFlow();
+
+        HitDamageInit();
     }
 
     /// <summary>
@@ -110,5 +116,17 @@ public class InputKeyManager : MonoBehaviour
     void TimeFlow()
     {
         currentTime += Time.deltaTime;
+        curDamageTime += Time.deltaTime;
+    }
+    /// <summary>
+    /// 피격 데미지 위치 초기화
+    /// </summary>
+    void HitDamageInit()
+    {
+        if (curDamageTime > 0.5f)
+        {
+            orderHitNum = 0;
+            curDamageTime = 0;
+        }
     }
 }

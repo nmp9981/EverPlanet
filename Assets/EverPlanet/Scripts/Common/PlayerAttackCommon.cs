@@ -299,12 +299,12 @@ public static class PlayerAttackCommon
     /// </summary>
     /// <param name="Damage">데미지</param>
     /// <param name="playerPos">플레이어 위치</param>
-    public static void ShowDamageAsSkin(long Damage, GameObject playerPos)
+    public static void ShowDamageAsHitSkin(long Damage, GameObject playerPos, int hitNum)
     {
         string damageString = Damage.ToString();
         float damageLength = DamageObjectFulling.DamageSkinInstance.hitDamageImage[0].bounds.size.x * damageString.Length;
         Bounds bounds = playerPos.GetComponent<BoxCollider>().bounds;
-        Vector3 damageStartPos = bounds.center + Vector3.up * (bounds.size.y * 0.5f+1f) + damageLength * Vector3.left * 0.25f;
+        Vector3 damageStartPos = bounds.center + Vector3.up * (bounds.size.y * 0.5f+1f+hitNum*0.75f) + damageLength * Vector3.left * 0.25f;
 
         for (int i = 0; i < damageString.Length; i++)
         {
