@@ -38,5 +38,7 @@ public class ProjectileMonster : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        //충돌시 이펙트 off
+
     }
 }

@@ -8,12 +8,14 @@ public class MonsterAttack : MonoBehaviour
     [SerializeField] GameObject attackObj;//공격 투사체
     [SerializeField] GameObject target;//타겟 범위
     [SerializeField] float attackRange;//사거리 범위
+    [SerializeField] EffectFulling effectFulling;
 
     private bool firstAttack;
 
     private void OnEnable()
     {
         monsterInfo = this.gameObject.GetComponent<MonsterInfo>();
+        effectFulling = GameObject.Find("ObjectFulling").GetComponent<EffectFulling>();
     }
 
     private void Start()
@@ -49,6 +51,10 @@ public class MonsterAttack : MonoBehaviour
 
             //플레이어 감지
             if (MonsterAttackCommon.IsPlayerInArea(target.transform.position, this.gameObject.transform.position, attackRange)){
+                //여기서 공격 범위 이펙트
+                GameObject effectObj = effectFulling.MakeObj(0);
+                effectObj.transform.position = target.transform.position;
+               
                 //투사체 발사
                 Vector3 spawnPosition = transform.position + Vector3.up*1.5f;
                 GameObject projectileObject = Instantiate(attackObj, spawnPosition, Quaternion.identity);
