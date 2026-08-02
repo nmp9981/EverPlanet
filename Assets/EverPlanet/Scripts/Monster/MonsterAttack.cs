@@ -53,7 +53,10 @@ public class MonsterAttack : MonoBehaviour
 
             //플레이어 감지
             if (MonsterAttackCommon.IsPlayerInArea(target.transform.position, this.gameObject.transform.position, attackRange)){
-                LayserAttack();
+                int attackNum = Random.Range(0, 2);
+                if(attackNum == 0) ThrowStone();
+                else
+                    LayserAttack();
             }
             
         }
@@ -101,7 +104,14 @@ public class MonsterAttack : MonoBehaviour
 
     }
 
-    //size는 선분의 굵기 
+    /// <summary>
+    /// 두 점을 연결하는 선분 생성
+    /// size는 선분의 굵기 
+    /// </summary>
+    /// <param name="point1"></param>
+    /// <param name="point2"></param>
+    /// <param name="pipeGM"></param>
+    /// <param name="size"></param>
     public void ConnectTwoPoints(GameObject point1, GameObject point2,GameObject pipeGM, float size)
     {
         Vector3 p1 = point1.transform.position;
@@ -121,6 +131,6 @@ public class MonsterAttack : MonoBehaviour
         pipeGM.transform.rotation = Quaternion.LookRotation(dir) * Quaternion.Euler(90f, 0f, 0f);
 
         // 3. 스케일 설정 (Unity 기본 Cylinder 기준 높이가 2이므로 distance * 0.5f)
-        pipeGM.transform.localScale = new Vector3(size, distance * 0.6f, size);
+        pipeGM.transform.localScale = new Vector3(size, distance * 0.5f, size);
     }
 }
