@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class MonsterAttack : MonoBehaviour
@@ -83,19 +84,43 @@ public class MonsterAttack : MonoBehaviour
     private void LayserAttack()
     {
         //투사체 발사
-        GameObject layserObject = Instantiate(attackObj[1], transform.position+Vector3.up, Quaternion.identity);
+        //GameObject layserObject = Instantiate(attackObj[1], transform.position+Vector3.up, Quaternion.identity);
 
         //해당 방향으로 발사
-        Vector3 diff = target.transform.position - this.gameObject.transform.position;
-        Vector3 dir = diff.normalized;
-        Vector3 dirY0 = new Vector3(dir.x, 0, dir.z);
-        layserObject.GetComponent<LayserStraitMonster>().SetMagicDamage(monsterInfo.mobAttack);
-        layserObject.GetComponent<Rigidbody>().AddForce(5*dir, ForceMode.Impulse);
+        //Vector3 diff = target.transform.position - this.gameObject.transform.position;
+        //Vector3 dir = diff.normalized;
+        //Vector3 dirY0 = new Vector3(dir.x, 0, dir.z);
+        //layserObject.GetComponent<LayserStraitMonster>().SetMagicDamage(monsterInfo.mobAttack);
+        //layserObject.GetComponent<Rigidbody>().AddForce(5*dir, ForceMode.Impulse);
 
         //여기서 공격 이펙트
-        GameObject effectObj = effectFulling.MakeObj(1);
-        Vector3 avgPos = (this.gameObject.transform.position + target.transform.position) / 2;
-        effectObj.transform.position = avgPos;
-        effectObj.transform.LookAt(dir);
+        GameObject effectObj = Instantiate(attackObj[1], transform.position + Vector3.up, Quaternion.identity);
+        //GameObject effectObj = effectFulling.MakeObj(1);
+        effectObj.GetComponent<LayserStraitMonster>().SetMagicDamage(monsterInfo.mobAttack);
+        ConnectTwoPoints(this.gameObject, target, effectObj, 0.5f);
+
+    }
+
+    //size는 선분의 굵기 
+    public void ConnectTwoPoints(GameObject point1, GameObject point2,GameObject pipeGM, float size)
+    {
+        Vector3 p1 = point1.transform.position;
+        Vector3 p2 = point2.transform.position;
+
+        Vector3 dir = p2 - p1;
+        float distance = dir.magnitude;
+
+        if (distance <= Mathf.Epsilon) return; // 두 점이 같은 위치에 있을 때 예외 처리
+
+        // 1. 위치 설정: 두 점의 중점
+        pipeGM.transform.position = (p1 + p2) * 0.5f;
+
+        // 2. 회전 설정: dir 방향을 바라보도록 설정
+        // 기본 Unity Cylinder는 Y축이 길쭉한 방향이므로, 
+        // dir 방향을 Y축(Up)으로 삼도록 LookRotation을 설정합니다.
+        pipeGM.transform.rotation = Quaternion.LookRotation(dir) * Quaternion.Euler(90f, 0f, 0f);
+
+        // 3. 스케일 설정 (Unity 기본 Cylinder 기준 높이가 2이므로 distance * 0.5f)
+        pipeGM.transform.localScale = new Vector3(size, distance * 0.6f, size);
     }
 }
