@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjectileMonster : MonoBehaviour
+public class LayserStraitMonster : MonoBehaviour
 {
     //付过 单固瘤
     private int magicDamage;
@@ -30,13 +30,6 @@ public class ProjectileMonster : MonoBehaviour
             PlayerAttackCommon.ShowDamageAsHitSkin(magicDamage, other.gameObject, InputKeyManager.orderHitNum);
             InputKeyManager.orderHitNum += 1;
             Destroy(this.gameObject);
-        }
-        if (other.CompareTag("Land"))
-        {
-            if(Time.time -  spawnTime > 0.5f)//积己饶 公利矫埃
-            {
-                Destroy(this.gameObject);
-            }
         }
     }
 }
