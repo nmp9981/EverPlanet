@@ -14,10 +14,12 @@ public class MonsterAttack : MonoBehaviour
     [SerializeField] float wideAttackArea;//광역 스킬 공격 범위
     [SerializeField] EffectFulling effectFulling;
 
-    
+    [SerializeField] List<bool> isAttackAbleType = new List<bool>();//공격 가능 여부
 
     private Bounds monsterBound;
     private bool firstAttack;
+    private int attackMaxNum;
+    List<int> ableAttackNum = new List<int>();//공격 가능한 번호 리스트
 
     private void OnEnable()
     {
@@ -30,6 +32,13 @@ public class MonsterAttack : MonoBehaviour
         target = GameObject.Find("Player");
         monsterBound = this.gameObject.GetComponent<Collider>().bounds;
         firstAttack = true;
+
+        //공격 가능한것 추가
+        foreach (var item in isAttackAbleType)
+        {
+            if (item) ableAttackNum.Add(isAttackAbleType.IndexOf(item));
+        }
+        attackMaxNum = ableAttackNum.Count;
     }
 
     /// <summary>
@@ -59,7 +68,7 @@ public class MonsterAttack : MonoBehaviour
 
             //플레이어 감지
             if (MonsterAttackCommon.IsPlayerInArea(target.transform.position, this.gameObject.transform.position, attackRange)){
-                int attackNum = Random.Range(0, 3);
+                int attackNum = Random.Range(0, attackMaxNum);
 
                 switch (attackNum)
                 {
