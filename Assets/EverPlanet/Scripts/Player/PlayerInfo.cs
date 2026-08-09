@@ -17,9 +17,9 @@ public class PlayerInfo : MonoBehaviour
 
     //HP,MP 관련
     public static int curHP = 0;
-    public static int maxHP = 11111;
+    public static int maxHP = 18227;
     public static int curMP = 0;
-    public static int maxMP = 7700;
+    public static int maxMP = 7713;
 
     //경험치 관련
     public static int curExp = 0;//현재 경험치

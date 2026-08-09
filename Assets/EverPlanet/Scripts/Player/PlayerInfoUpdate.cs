@@ -42,6 +42,23 @@ public class PlayerInfoUpdate : MonoBehaviour
         PlayerInfo.curMP = Mathf.Max(0, PlayerInfo.curMP - amount);
         _playerUI.UpdatePlayerMpInfo();
     }
+    /// <summary>
+    /// HP 증가
+    /// </summary>
+    public void IncreasePlayerHP(int amount)
+    {
+        PlayerInfo.curHP = Mathf.Min(PlayerInfo.maxHP, PlayerInfo.curHP + amount);
+        _playerUI.UpdatePlayerHpInfo();
+    }
+
+    /// <summary>
+    /// MP 증가
+    /// </summary>
+    public void IncreasePlayerMP(int amount)
+    {
+        PlayerInfo.curMP = Mathf.Min(PlayerInfo.maxMP, PlayerInfo.curMP + amount);
+        _playerUI.UpdatePlayerMpInfo();
+    }
 
     /// <summary>
     /// 레벨 업
