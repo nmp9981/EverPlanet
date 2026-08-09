@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     {
         GameObject projecTile = objFulling.MakeObj(0);
         Projectile proj = projecTile.GetComponent<Projectile>();
-        projecTile.transform.position = playerDirObjectTransform.position;//캐릭터 위치에서 날리기 시작
+        projecTile.transform.position = playerDirObjectTransform.position+0.5f*Vector3.up;//캐릭터 위치에서 날리기 시작
         proj.hitNum = 2;
         proj.skillDamage = 100;
         proj.isPenetration = false;//관통 X

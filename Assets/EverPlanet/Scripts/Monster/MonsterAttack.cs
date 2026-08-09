@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,8 +11,12 @@ public class MonsterAttack : MonoBehaviour
     [SerializeField] List<GameObject> attackObj = new List<GameObject>();//공격 투사체
     [SerializeField] GameObject target;//타겟 범위
     [SerializeField] float attackRange;//사거리 범위
+    [SerializeField] float wideAttackArea;//광역 스킬 공격 범위
     [SerializeField] EffectFulling effectFulling;
 
+    
+
+    private Bounds monsterBound;
     private bool firstAttack;
 
     private void OnEnable()
@@ -23,6 +28,7 @@ public class MonsterAttack : MonoBehaviour
     private void Start()
     {
         target = GameObject.Find("Player");
+        monsterBound = this.gameObject.GetComponent<Collider>().bounds;
         firstAttack = true;
     }
 
@@ -53,12 +59,26 @@ public class MonsterAttack : MonoBehaviour
 
             //플레이어 감지
             if (MonsterAttackCommon.IsPlayerInArea(target.transform.position, this.gameObject.transform.position, attackRange)){
-                int attackNum = Random.Range(0, 2);
-                if(attackNum == 0) ThrowStone();
-                else
-                    LayserAttack();
+                int attackNum = Random.Range(0, 3);
+
+                switch (attackNum)
+                {
+                    case 0:
+                        ThrowStone();
+                        break;
+                    case 1:
+                        LayserAttack();
+                        break;
+                    case 2:
+                        var effectList = ShowWideTargetEffect();
+                        yield return new WaitForSeconds(3f);//3초뒤 공격
+                        RiseSpikes(effectList);
+                        effectList.Clear();
+                        break;
+                    default:
+                        break;
+                }
             }
-            
         }
     }
 
@@ -86,22 +106,24 @@ public class MonsterAttack : MonoBehaviour
     /// </summary>
     private void LayserAttack()
     {
-        //투사체 발사
-        //GameObject layserObject = Instantiate(attackObj[1], transform.position+Vector3.up, Quaternion.identity);
-
-        //해당 방향으로 발사
-        //Vector3 diff = target.transform.position - this.gameObject.transform.position;
-        //Vector3 dir = diff.normalized;
-        //Vector3 dirY0 = new Vector3(dir.x, 0, dir.z);
-        //layserObject.GetComponent<LayserStraitMonster>().SetMagicDamage(monsterInfo.mobAttack);
-        //layserObject.GetComponent<Rigidbody>().AddForce(5*dir, ForceMode.Impulse);
-
         //여기서 공격 이펙트
         GameObject effectObj = Instantiate(attackObj[1], transform.position + Vector3.up, Quaternion.identity);
-        //GameObject effectObj = effectFulling.MakeObj(1);
         effectObj.GetComponent<LayserStraitMonster>().SetMagicDamage(monsterInfo.mobAttack);
         ConnectTwoPoints(this.gameObject, target, effectObj, 0.5f);
 
+    }
+
+    /// <summary>
+    /// 가시 돋기
+    /// </summary>
+    private void RiseSpikes(List<Vector3> targetPosList)
+    {
+        //공격 범위 이펙트 띄우기
+        for (int i=0;i<targetPosList.Count; i++)
+        {
+            GameObject needleObject = Instantiate(attackObj[2], targetPosList[i], Quaternion.identity);
+            needleObject.GetComponent<NeedleMonster>().SetMagicDamage(monsterInfo.mobAttack);
+        }
     }
 
     /// <summary>
@@ -132,5 +154,30 @@ public class MonsterAttack : MonoBehaviour
 
         // 3. 스케일 설정 (Unity 기본 Cylinder 기준 높이가 2이므로 distance * 0.5f)
         pipeGM.transform.localScale = new Vector3(size, distance * 0.5f, size);
+    }
+
+    /// <summary>
+    /// 광범위 이펙트 띄우기
+    /// </summary>
+    List<Vector3> ShowWideTargetEffect()
+    {
+        //공격 위치 저장
+        List<Vector3> targetPosList = new List<Vector3>();
+        for (int i = 0; i < 8; i++)
+        {
+            float theta = 45 * i;
+            float xSize = Random.Range(3, wideAttackArea);
+            float zSize = Random.Range(3, wideAttackArea);
+            Vector3 center = transform.position - Vector3.down* monsterBound.size.y + new Vector3(xSize * Mathf.Cos(theta), 0, zSize * Mathf.Sin(theta));
+            targetPosList.Add(center);
+        }
+
+        //공격 범위 이펙트 띄우기
+        foreach (Vector3 pos in targetPosList)
+        {
+            GameObject effectObj = effectFulling.MakeObj(0);
+            effectObj.transform.position = pos;
+        }
+        return targetPosList;
     }
 }
