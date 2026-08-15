@@ -41,6 +41,8 @@ public class MonsterSpawn : MonoBehaviour
                 {
                     MonsterMove mobMove = mob.GetComponent<MonsterMove>();
 
+                    mobMove.chaseRange = 10f;
+                    mobMove.isAggro = false;
                     mobMove.SetDiameter();
 
                     mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
@@ -81,6 +83,7 @@ public class MonsterSpawn : MonoBehaviour
 
                     mobMove.SetDiameter();
                     mobMove.isAggro = true;
+                    mobMove.chaseRange = 100f;
 
                     mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
                     mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);
