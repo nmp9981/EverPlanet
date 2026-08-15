@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterSpawn : MonoBehaviour
@@ -9,6 +8,7 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] MonsterFulling monsterFulling;
     //스폰 지점
     [SerializeField] List<Transform> spawnPosList = new List<Transform>();
+    [SerializeField] List<Transform> spawnPosListInTheRoom = new List<Transform>();
     //맵에 활성화된 몬스터
     public static List<GameObject> activeMonster = new List<GameObject>();
     //맵에 활성화된 보스 몬스터
@@ -23,7 +23,7 @@ public class MonsterSpawn : MonoBehaviour
     /// <summary>
     /// 몬스터 스폰 과정
     /// </summary>
-    void SpawnFlow()
+    public void SpawnFlow()
     {
         Array moveTypeArray = Enum.GetValues(typeof(MonsterMoveType));
         foreach (var trans in spawnPosList)
@@ -56,5 +56,37 @@ public class MonsterSpawn : MonoBehaviour
         bossMob.transform.position = spawnPosList[spawnPosList.Count-1].position;
         activeMonster.Add(bossMob);
         activeBossMonster.Add(bossMob.GetComponent<MonsterInfo>());
+    }
+
+    /// <summary>
+    /// TheRoom맵 몬스터 스폰
+    /// </summary>
+    public void SpawnInTheRoom()
+    {
+        Array moveTypeArray = Enum.GetValues(typeof(MonsterMoveType));
+        foreach (var trans in spawnPosListInTheRoom)
+        {
+            int ranCount = UnityEngine.Random.Range(5, 9);
+            int mobRannum = UnityEngine.Random.Range(0, 2);
+            for (int i = 0; i < ranCount; i++)
+            {
+                float xRan = UnityEngine.Random.Range(-3, 3);
+                float zRan = UnityEngine.Random.Range(-3, 3);
+                int moveRanNum = UnityEngine.Random.Range(0, (int)MonsterMoveType.Count);
+
+                GameObject mob = monsterFulling.MakeObj(mobRannum);
+                if (mob != null)
+                {
+                    MonsterMove mobMove = mob.GetComponent<MonsterMove>();
+
+                    mobMove.SetDiameter();
+                    mobMove.isAggro = true;
+
+                    mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
+                    mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);
+                    activeMonster.Add(mob);
+                }
+            }
+        }
     }
 }
