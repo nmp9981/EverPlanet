@@ -47,6 +47,8 @@ public class MonsterSpawn : MonoBehaviour
             }
         }
         //º¸½º
+        if(activeBossMonster.Count > 0) return;
+
         GameObject bossMob = monsterFulling.MakeObj(2);
         MonsterMove bossMobMove = bossMob.GetComponent<MonsterMove>();
         bossMobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(0);
