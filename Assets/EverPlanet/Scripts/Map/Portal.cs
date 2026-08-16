@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Portal : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Portal : MonoBehaviour
 
             //어느 맵에 입장했는가?
             mapManage.mapType = nextMapType;
+            mapManage.BridgeModeManager(mapManage.mapType);
         }
     }
 }

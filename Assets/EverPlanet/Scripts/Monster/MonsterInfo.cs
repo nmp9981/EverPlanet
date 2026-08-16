@@ -61,6 +61,10 @@ public class MonsterInfo : MonoBehaviour
     {
         playerInfo.GetExp(mobExp);
         MonsterSpawn.activeMonster.Remove(this.gameObject);
+        if(isBoss)
+        {
+            MapManage.isKillBoss = true;
+        }
         this.gameObject.SetActive(false);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 public enum MapType
@@ -14,17 +15,21 @@ public enum MapType
 public class MapManage : MonoBehaviour
 {
     [SerializeField] MonsterSpawn monsterSpawn;
+    [SerializeField] ModeManager modeManager;
     public List<Portal> portalList = new();
     public MapType mapType;
+    public static bool isKillBoss;
 
     private void Awake()
     {
+        isKillBoss = false;
         mapType = MapType.None;
     }
 
     private void Start()
     {
         StartCoroutine(InspectMap());
+        StartCoroutine(CheckBossMap());
     }
 
     /// <summary>
@@ -47,6 +52,64 @@ public class MapManage : MonoBehaviour
                 monsterSpawn.SpawnInTheRoom();
             }
             yield return new WaitForSeconds(11f);
+        }
+    }
+
+    /// <summary>
+    /// º¸½º ¸Ê Ã¼Å©
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator CheckBossMap()
+    {
+        while (true)
+        {
+            BossKillInMap();
+            yield return new WaitForSeconds(5f);
+        }
+    }
+
+    /// <summary>
+    /// ¸ðµåÀüÈ¯ ¿¬°á
+    /// </summary>
+    public void BridgeModeManager(MapType mapType)
+    {
+        if(mapType == MapType.Deongeon)
+        {
+            OffPortal(portalList[0]);
+        }
+        else if (mapType == MapType.TheRoom)
+        {
+            OffPortal(portalList[5]);
+            modeManager.ShowTimeUI();
+        }
+    }
+
+    /// <summary>
+    /// Æ÷Å» Off
+    /// </summary>
+    public void OffPortal(Portal portal)
+    {
+        portal.transform.parent.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Æ÷Å» On
+    /// </summary>
+    /// <param name="portal"></param>
+    public void OnPortal(Portal portal)
+    {
+        portal.transform.parent.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// ¸Ê¿¡ º¸½º°¡ Á×¾ú´Â°¡?
+    /// </summary>
+    void BossKillInMap()
+    {
+        if (isKillBoss)
+        {
+            OnPortal(portalList[0]);
+            isKillBoss = false;
         }
     }
 }
