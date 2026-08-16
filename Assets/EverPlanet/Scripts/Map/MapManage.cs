@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MapType
@@ -37,13 +38,15 @@ public class MapManage : MonoBehaviour
             if(mapType == MapType.Deongeon)
             {
                 //던전 맵에 입장했을 때
+                monsterSpawn.SpawnFlowInDeongeon();
+                yield return null;
             }
             else if (mapType == MapType.TheRoom)
             {
                 //더 룸 맵에 입장했을 때
                 monsterSpawn.SpawnInTheRoom();
             }
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(11f);
         }
     }
 }

@@ -14,16 +14,11 @@ public class MonsterSpawn : MonoBehaviour
     //맵에 활성화된 보스 몬스터
     public static List<MonsterInfo> activeBossMonster = new List<MonsterInfo>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        SpawnFlow();
-    }
-
+   
     /// <summary>
     /// 몬스터 스폰 과정
     /// </summary>
-    public void SpawnFlow()
+    public void SpawnFlowInDeongeon()
     {
         Array moveTypeArray = Enum.GetValues(typeof(MonsterMoveType));
         foreach (var trans in spawnPosList)
