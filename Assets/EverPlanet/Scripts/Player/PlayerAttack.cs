@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -274,6 +275,42 @@ public class PlayerAttack : MonoBehaviour
             {
                 PlayerAttackCommon.PlayerToMonsterAttack(tarGetCol, 100, idx + 2);
                 yield return new WaitForSeconds(0.15f);
+            }
+        }
+    }
+    /// <summary>
+    /// 도약
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator LeapAttack()
+    {
+        //가장 가까이에 있는 몬스터
+        Vector3 lookDir = playerDirObjectTransform.position - transform.position;
+        GameObject nearTarget = PlayerAttackCommon.NearMonserFromPlayer(lookDir, transform.position, 8);
+
+        //타겟이 있는가?
+        if (nearTarget != null)
+        {
+            //몬스터와의 거리
+            float mobDist = (nearTarget.transform.position - transform.position).magnitude;
+
+            if(mobDist > 3f)
+            {
+                //몬스터 위치로 점프 이동
+                Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
+                Vector3 lookDirXZ = new Vector3(lookDir.x, 0, lookDir.z);
+                Vector3 jumpPower = lookDirXZ.normalized * mobDist * 2 + 3 * Vector3.up;
+                rigid.AddForce(jumpPower, ForceMode.Impulse);//y축 방향으로 힘을 실어준다.(점프)
+
+                yield return new WaitForSeconds(0.1667f * mobDist);
+
+                //타겟들 공격
+                List<GameObject> targets = PlayerAttackCommon.TargetMonstersInRange(nearTarget.transform.position, 2, 2, 10);
+                foreach (var taeget in targets)
+                {
+                    Collider collider = taeget.GetComponent<Collider>();
+                    PlayerAttackCommon.PlayerToMonsterAttack(collider, 280, 2);
+                }
             }
         }
     }

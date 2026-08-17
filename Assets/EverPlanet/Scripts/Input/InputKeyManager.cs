@@ -108,7 +108,12 @@ public class InputKeyManager : MonoBehaviour
             playerInfoUpdate.DecreasePlayerMP(27);
             StartCoroutine(playerAttack.MultiHitAttack(8));
         }
-        if(Input.GetKeyDown(KeyCode.A))//HP회복
+        if (Input.GetKeyDown(KeyCode.J))//도약
+        {
+            playerInfoUpdate.DecreasePlayerMP(24);
+            StartCoroutine(playerAttack.LeapAttack());
+        }
+        if (Input.GetKeyDown(KeyCode.A))//HP회복
         {
             playerInfoUpdate.IncreasePlayerHP(5000);
         }
