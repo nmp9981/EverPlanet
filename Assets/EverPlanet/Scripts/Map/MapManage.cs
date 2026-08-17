@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 public enum MapType
@@ -9,6 +7,7 @@ public enum MapType
     None,
     Deongeon,
     TheRoom,
+    DeongeonBoss,
     Count
 }
 
