@@ -64,8 +64,12 @@ public class PlayerInfoUpdate : MonoBehaviour
     /// ·¹º§ ¾÷
     /// </summary>
     /// <param name="amount"></param>
-    public static void LevelUP()
+    public void LevelUP()
     {
-
+        PlayerInfo.playerLv = Mathf.Min(PlayerInfo.playerMaxLv, PlayerInfo.playerLv+1);
+        PlayerInfo.curExp = Mathf.Max(0, PlayerInfo.curExp-PlayerInfo.maxExp);
+        PlayerInfo.maxExp = (PlayerInfo.maxExp*104)/100;
+        PlayerInfo.curExp = 0;
+        _playerUI.UpdatePlayerLvInfo();
     }
 }

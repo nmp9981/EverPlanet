@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
@@ -15,6 +14,10 @@ public class PlayerInfo : MonoBehaviour
     public static float criticalRate = 50;//크리티컬 확률
     public static int criticalDamage = 200;//크리티컬 데미지
 
+    //레벨 관련
+    public static int playerLv;//플레이어 레벨
+    public static int playerMaxLv=100;//플레이어 최대 레벨
+
     //HP,MP 관련
     public static int curHP = 0;
     public static int maxHP = 18227;
@@ -23,7 +26,7 @@ public class PlayerInfo : MonoBehaviour
 
     //경험치 관련
     public static int curExp = 0;//현재 경험치
-    public static int maxExp = 1000000;//최대 경험치
+    public static int maxExp = 100000;//최대 경험치
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,5 +48,6 @@ public class PlayerInfo : MonoBehaviour
         curExp = 0;
         curHP = maxHP;
         curMP = maxMP;
+        playerLv = 10;
     }
 }

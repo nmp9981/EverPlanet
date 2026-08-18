@@ -13,11 +13,14 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Image expBar;
     [SerializeField] TextMeshProUGUI expText;
 
+    [SerializeField] TextMeshProUGUI lvText;
+
     private void Start()
     {
         UpdatePlayerHpInfo();
         UpdatePlayerMpInfo();
         UpdatePlayerExpInfo();
+        UpdatePlayerLvInfo();
     }
 
     /// <summary>
@@ -37,11 +40,19 @@ public class PlayerUI : MonoBehaviour
         hpText.text = $"{PlayerInfo.curHP} / {PlayerInfo.maxHP}";
     }
     /// <summary>
-    /// 플레이어 HP 정보 업데이트
+    /// 플레이어 MP 정보 업데이트
     /// </summary>
     public void UpdatePlayerMpInfo()
     {
         mpBar.fillAmount = (float)PlayerInfo.curMP / PlayerInfo.maxMP;
         mpText.text = $"{PlayerInfo.curMP} / {PlayerInfo.maxMP}";
+    }
+    /// <summary>
+    /// 플레이어 Lv 정보 업데이트
+    /// </summary>
+    public void UpdatePlayerLvInfo()
+    {
+        UpdatePlayerExpInfo();
+        lvText.text = $"{PlayerInfo.playerLv}";
     }
 }
