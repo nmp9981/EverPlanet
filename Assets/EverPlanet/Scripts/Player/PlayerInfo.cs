@@ -9,7 +9,7 @@ public class PlayerInfo : MonoBehaviour
     protected float playerRotateSpeed = 15;
 
     //공격 관련
-    public static float attackPower = 2500;//공격력
+    public static float attackPower = 150;//공격력
     public static float workmanship = 30;//숙련도
     public static float criticalRate = 50;//크리티컬 확률
     public static int criticalDamage = 200;//크리티컬 데미지
@@ -20,13 +20,13 @@ public class PlayerInfo : MonoBehaviour
 
     //HP,MP 관련
     public static int curHP = 0;
-    public static int maxHP = 18227;
+    public static int maxHP = 8000;
     public static int curMP = 0;
-    public static int maxMP = 7713;
+    public static int maxMP = 2000;
 
     //경험치 관련
     public static int curExp = 0;//현재 경험치
-    public static int maxExp = 100000;//최대 경험치
+    public static int maxExp = 1200;//최대 경험치
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

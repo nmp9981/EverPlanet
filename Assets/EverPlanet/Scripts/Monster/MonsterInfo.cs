@@ -29,7 +29,7 @@ public class MonsterInfo : MonoBehaviour
     /// <summary>
     /// HP¹Ù ¼¼ÆÃ
     /// </summary>
-    protected void InitHP_UISet()
+    public void InitHP_UISet()
     {
         playerInfo = GameObject.Find("Player").GetComponent<PlayerInfoUpdate>();
         mobCurrentHP = mobMaxHP;

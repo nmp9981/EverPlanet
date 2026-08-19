@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterSpawn : MonoBehaviour
@@ -39,6 +40,7 @@ public class MonsterSpawn : MonoBehaviour
                     mobMove.chaseRange = 10f;
                     mobMove.isAggro = false;
                     mobMove.SetDiameter();
+                    mobMove.InitHP_UISet();
 
                     mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
                     mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);
@@ -77,10 +79,8 @@ public class MonsterSpawn : MonoBehaviour
                 if (mob != null)
                 {
                     MonsterMove mobMove = mob.GetComponent<MonsterMove>();
-
-                    mobMove.SetDiameter();
-                    mobMove.isAggro = true;
-                    mobMove.chaseRange = 100f;
+                    SetMonsterSpec(mobMove);
+                    mobMove.InitHP_UISet();
 
                     mobMove.moveType = (MonsterMoveType)moveTypeArray.GetValue(moveRanNum);
                     mob.transform.position = trans.position + new Vector3(xRan, 0f, zRan);
@@ -110,5 +110,20 @@ public class MonsterSpawn : MonoBehaviour
         }
         activeMonster.Clear();
         activeBossMonster.Clear();
+    }
+
+    /// <summary>
+    /// 몬스터 스펙 설정
+    /// </summary>
+    void SetMonsterSpec(MonsterMove mobMove)
+    {
+        mobMove.mobLv = PlayerInfo.playerLv;
+        mobMove.mobMaxHP = mobMove.mobLv * mobMove.mobLv * 20;
+        mobMove.mobExp = mobMove.mobLv*30;
+        mobMove.mobAttack = mobMove.mobLv* (mobMove.mobLv/5);
+
+        mobMove.SetDiameter();
+        mobMove.isAggro = true;
+        mobMove.chaseRange = 100f;
     }
 }

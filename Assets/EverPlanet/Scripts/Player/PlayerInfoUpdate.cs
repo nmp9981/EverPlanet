@@ -66,10 +66,22 @@ public class PlayerInfoUpdate : MonoBehaviour
     /// <param name="amount"></param>
     public void LevelUP()
     {
-        PlayerInfo.playerLv = Mathf.Min(PlayerInfo.playerMaxLv, PlayerInfo.playerLv+1);
-        PlayerInfo.curExp = Mathf.Max(0, PlayerInfo.curExp-PlayerInfo.maxExp);
-        PlayerInfo.maxExp = (PlayerInfo.maxExp*104)/100;
-        PlayerInfo.curExp = 0;
-        _playerUI.UpdatePlayerLvInfo();
+        if(PlayerInfo.playerLv< PlayerInfo.playerMaxLv)
+        {
+            PlayerInfo.playerLv = PlayerInfo.playerLv + 1;
+            PlayerInfo.curExp = Mathf.Max(0, PlayerInfo.curExp - PlayerInfo.maxExp);
+            PlayerInfo.maxExp = (PlayerInfo.playerLv==PlayerInfo.playerMaxLv)?2100000000:(PlayerInfo.maxExp * 104) / 100;
+            PlayerInfo.maxHP = PlayerInfo.maxHP + Random.Range(125, 140);
+            PlayerInfo.maxMP = PlayerInfo.maxMP + Random.Range(44, 57);
+            PlayerInfo.curHP = PlayerInfo.maxHP;
+            PlayerInfo.curMP = PlayerInfo.maxMP;
+
+            PlayerInfo.attackPower = PlayerInfo.attackPower + 50;//공격력
+            PlayerInfo.workmanship = PlayerInfo.workmanship + 5 * (PlayerInfo.playerLv / 10);//숙련도
+
+            _playerUI.UpdatePlayerHpInfo();
+            _playerUI.UpdatePlayerMpInfo();
+            _playerUI.UpdatePlayerLvInfo();
+        }
     }
 }
