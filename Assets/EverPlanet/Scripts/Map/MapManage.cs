@@ -39,18 +39,17 @@ public class MapManage : MonoBehaviour
     {
         while (true)
         {
-            if(mapType == MapType.Deongeon)
+            if (mapType == MapType.Deongeon)
             {
                 //던전 맵에 입장했을 때
                 monsterSpawn.SpawnFlowInDeongeon();
                 yield return null;
             }
-            else if (mapType == MapType.TheRoom)
+            else if (mapType == MapType.TheRoom)//더 룸 맵에 입장했을 때
             {
-                //더 룸 맵에 입장했을 때
                 monsterSpawn.SpawnInTheRoom();
             }
-            yield return new WaitForSeconds(11f);
+            yield return new WaitForSeconds(9f);
         }
     }
 
@@ -80,6 +79,10 @@ public class MapManage : MonoBehaviour
         {
             OffPortal(portalList[5]);
             modeManager.ShowTimeUI();
+        }
+        else
+        {
+            monsterSpawn.ClearActiveMonster();
         }
     }
 

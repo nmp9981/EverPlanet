@@ -89,4 +89,26 @@ public class MonsterSpawn : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// 몬스터 리젠 초기화
+    /// </summary>
+    public void ClearActiveMonster()
+    {
+        foreach (var mob in activeMonster)
+        {
+            if (mob != null)
+            {
+                mob.gameObject.SetActive(false);
+            }
+        }
+        foreach (var mob in activeBossMonster)
+        {
+            if (mob != null)
+            {
+                mob.gameObject.SetActive(false);
+            }
+        }
+        activeMonster.Clear();
+        activeBossMonster.Clear();
+    }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
     //이동 관련
-    public float playerSpeed = 5;
+    public float playerSpeed = 6;
     public float playerJumpPower = 8;
     public int maxJumpCount;
     protected float playerRotateSpeed = 15;
