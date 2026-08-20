@@ -12,6 +12,9 @@ public class InputKeyManager : MonoBehaviour
     [SerializeField] PlayerAttack playerAttack;
     [SerializeField] PlayerInfoUpdate playerInfoUpdate;
 
+    //플레이어 UI
+    [SerializeField] PlayerStatUI playerUI;
+
     //타이머
     float currentTime = 0;
 
@@ -23,6 +26,7 @@ public class InputKeyManager : MonoBehaviour
     {
         InputMove();
         InputAttack();
+        InputUI();
 
         TimeFlow();
 
@@ -120,6 +124,16 @@ public class InputKeyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))//MP회복
         {
             playerInfoUpdate.IncreasePlayerMP(2000);
+        }
+    }
+    /// <summary>
+    /// UI 제어
+    /// </summary>
+    void InputUI()
+    {
+        if (Input.GetKeyDown(KeyCode.S))//플레이어 스탯 UI
+        {
+            playerUI.UpdatePlayerStat();
         }
     }
 

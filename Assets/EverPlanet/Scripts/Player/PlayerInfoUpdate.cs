@@ -71,8 +71,8 @@ public class PlayerInfoUpdate : MonoBehaviour
             PlayerInfo.playerLv = PlayerInfo.playerLv + 1;
             PlayerInfo.curExp = Mathf.Max(0, PlayerInfo.curExp - PlayerInfo.maxExp);
             PlayerInfo.maxExp = (PlayerInfo.playerLv==PlayerInfo.playerMaxLv)?2100000000:(PlayerInfo.maxExp * 104) / 100;
-            PlayerInfo.maxHP = PlayerInfo.maxHP + Random.Range(125, 140);
-            PlayerInfo.maxMP = PlayerInfo.maxMP + Random.Range(44, 57);
+            PlayerInfo.maxHP = PlayerInfo.maxHP + Random.Range(140, 155);
+            PlayerInfo.maxMP = PlayerInfo.maxMP + Random.Range(46, 60);
             PlayerInfo.curHP = PlayerInfo.maxHP;
             PlayerInfo.curMP = PlayerInfo.maxMP;
 
