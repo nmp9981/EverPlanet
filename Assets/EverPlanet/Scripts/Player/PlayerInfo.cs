@@ -28,6 +28,23 @@ public class PlayerInfo : MonoBehaviour
     public static int curExp = 0;//현재 경험치
     public static int maxExp = 1200;//최대 경험치
 
+    //AP 관련
+    public static int playerSTR;
+    public static int playerDEX;
+    public static int playerINT;
+    public static int playerLUK;
+
+    //상세 스탯
+    public static float phyDEF = 100;//물리방어력
+    public static float magicPower = 100;//마법공격력
+    public static float magicDEF = 100;//마법방어력
+    public static float accuracy = 100;//명중률
+    public static float avoidance = 100;//회피율
+    public static float handSpeed = 100;//손재주
+    public static float moveSpeed = 100;//이동속도
+    public static float jumpPower = 100;//점프력
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,5 +66,10 @@ public class PlayerInfo : MonoBehaviour
         curHP = maxHP;
         curMP = maxMP;
         playerLv = 10;
+
+        playerSTR = 12;
+        playerDEX = 5;
+        playerINT = 4;
+        playerLUK = 4;
     }
 }
