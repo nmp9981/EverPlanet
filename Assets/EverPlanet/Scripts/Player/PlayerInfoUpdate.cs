@@ -68,20 +68,38 @@ public class PlayerInfoUpdate : MonoBehaviour
     {
         if(PlayerInfo.playerLv< PlayerInfo.playerMaxLv)
         {
-            PlayerInfo.playerLv = PlayerInfo.playerLv + 1;
-            PlayerInfo.curExp = Mathf.Max(0, PlayerInfo.curExp - PlayerInfo.maxExp);
-            PlayerInfo.maxExp = (PlayerInfo.playerLv==PlayerInfo.playerMaxLv)?2100000000:(PlayerInfo.maxExp * 104) / 100;
-            PlayerInfo.maxHP = PlayerInfo.maxHP + Random.Range(140, 155);
-            PlayerInfo.maxMP = PlayerInfo.maxMP + Random.Range(46, 60);
-            PlayerInfo.curHP = PlayerInfo.maxHP;
-            PlayerInfo.curMP = PlayerInfo.maxMP;
-
-            PlayerInfo.attackPower = PlayerInfo.attackPower + 50;//공격력
-            PlayerInfo.workmanship = PlayerInfo.workmanship + 5 * (PlayerInfo.playerLv / 10);//숙련도
-
+            IncreasePlayerasicInfo();
+            IncreaseStat();
+            PlayerInfo.CalDetailStat();
+            
             _playerUI.UpdatePlayerHpInfo();
             _playerUI.UpdatePlayerMpInfo();
             _playerUI.UpdatePlayerLvInfo();
         }
+    }
+
+    /// <summary>
+    /// 플레이어 기본 정보 증가
+    /// </summary>
+    void IncreasePlayerasicInfo()
+    {
+        PlayerInfo.playerLv = PlayerInfo.playerLv + 1;
+        PlayerInfo.curExp = Mathf.Max(0, PlayerInfo.curExp - PlayerInfo.maxExp);
+        PlayerInfo.maxExp = (PlayerInfo.playerLv == PlayerInfo.playerMaxLv) ? 2100000000 : (PlayerInfo.maxExp * 104) / 100;
+        PlayerInfo.maxHP = PlayerInfo.maxHP + Random.Range(140, 155);
+        PlayerInfo.maxMP = PlayerInfo.maxMP + Random.Range(46, 60);
+        PlayerInfo.curHP = PlayerInfo.maxHP;
+        PlayerInfo.curMP = PlayerInfo.maxMP;
+    }
+
+    /// <summary>
+    /// 스탯 증가
+    /// </summary>
+    void IncreaseStat()
+    {
+        PlayerInfo.playerSTR += 5;
+        PlayerInfo.playerDEX += 2;
+        PlayerInfo.playerINT += 5;
+        PlayerInfo.playerLUK += 3;
     }
 }

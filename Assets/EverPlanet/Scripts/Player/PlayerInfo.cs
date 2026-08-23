@@ -17,6 +17,7 @@ public class PlayerInfo : MonoBehaviour
     //레벨 관련
     public static int playerLv;//플레이어 레벨
     public static int playerMaxLv=100;//플레이어 최대 레벨
+    public static string playerJobString;//직업명
 
     //HP,MP 관련
     public static int curHP = 0;
@@ -35,14 +36,13 @@ public class PlayerInfo : MonoBehaviour
     public static int playerLUK;
 
     //상세 스탯
-    public static float phyDEF = 100;//물리방어력
-    public static float magicPower = 100;//마법공격력
-    public static float magicDEF = 100;//마법방어력
-    public static float accuracy = 100;//명중률
-    public static float avoidance = 100;//회피율
-    public static float handSpeed = 100;//손재주
-    public static float moveSpeed = 100;//이동속도
-    public static float jumpPower = 100;//점프력
+    public static int phyDEF = 1;//물리방어력
+    public static int magicPower = 100;//마법공격력
+    public static int magicDEF = 100;//마법방어력
+    public static int accuracy = 100;//명중률
+    public static int avoidance = 100;//회피율
+    public static int moveSpeed = 100;//이동속도
+    public static int jumpPower = 100;//점프력
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -67,9 +67,41 @@ public class PlayerInfo : MonoBehaviour
         curMP = maxMP;
         playerLv = 10;
 
-        playerSTR = 12;
-        playerDEX = 5;
-        playerINT = 4;
-        playerLUK = 4;
+        playerSTR = 25;
+        playerDEX = 20;
+        playerINT = 20;
+        playerLUK = 5;
+
+        CalDetailStat();
+    }
+
+    /// <summary>
+    /// 상세 스탯 계산
+    /// </summary>
+    public static void CalDetailStat()
+    {
+        if (playerLv < 30)
+        {
+            playerJobString = "Warrior";
+        }
+        else if (playerLv >= 30 && playerLv < 70)
+        {
+            playerJobString = "Assassin";
+        }
+        else if (playerLv >= 70 && playerLv < 100)
+        {
+            playerJobString = "Knight";
+        }else playerJobString = "Grand Master";
+
+        attackPower = playerSTR*8+playerDEX*2;//공격력
+        workmanship = workmanship + 5 * (playerLv / 10);//숙련도
+
+        phyDEF = playerSTR * 4;
+        magicPower = playerINT;
+        magicDEF = playerINT * 3;
+        accuracy = (playerDEX * 8 + playerLUK * 5) / 10;
+        avoidance = playerLUK*3;
+        moveSpeed = 100 + playerDEX /9;
+        jumpPower = 100 + playerDEX /10;
     }
 }

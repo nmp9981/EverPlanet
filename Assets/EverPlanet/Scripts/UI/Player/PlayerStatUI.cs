@@ -41,28 +41,28 @@ public class PlayerStatUI : MonoBehaviour
         else
         {
             gameObject.SetActive(true);
-            playerJobText.text = $"Knight";
-            playerLvText.text = $"Lv. {PlayerInfo.playerLv}";
-            playerHPText.text = $"HP : {PlayerInfo.curHP} / {PlayerInfo.maxHP}";
-            playerMPText.text = $"MP : {PlayerInfo.curMP} / {PlayerInfo.maxMP}";
+            playerJobText.text = $"{PlayerInfo.playerJobString}";
+            playerLvText.text = $"{PlayerInfo.playerLv}";
+            playerHPText.text = $"{PlayerInfo.curHP} / {PlayerInfo.maxHP}";
+            playerMPText.text = $"{PlayerInfo.curMP} / {PlayerInfo.maxMP}";
 
-            int expRate = (int)(PlayerInfo.curExp / PlayerInfo.maxExp * 100f);
-            playerEXPText.text = $"{PlayerInfo.curExp} {expRate}%";
+            int expRate = (int)((PlayerInfo.curExp *100)/ PlayerInfo.maxExp);
+            playerEXPText.text = $"{PlayerInfo.curExp} ({expRate}%)";
 
-            playerSTRText.text = $"STR : {PlayerInfo.playerSTR}";
-            playerDEXText.text = $"DEX : {PlayerInfo.playerDEX}";
-            playerINTText.text = $"INT : {PlayerInfo.playerINT}";
-            playerLUKText.text = $"LUK : {PlayerInfo.playerLUK}";
+            playerSTRText.text = $"{PlayerInfo.playerSTR}";
+            playerDEXText.text = $"{PlayerInfo.playerDEX}";
+            playerINTText.text = $"{PlayerInfo.playerINT}";
+            playerLUKText.text = $"{PlayerInfo.playerLUK}";
 
-            playerAttackText.text = $"공격력 : {PlayerInfo.attackPower}";
-            playerPhyDEFText.text = $"물리방어력 : {PlayerInfo.phyDEF}";
-            playerMagicText.text = $"마법공격력 : {PlayerInfo.magicPower}";
-            playerMagicDEFext.text = $"마법방어력 : {PlayerInfo.magicDEF}";
-            playerAccText.text = $"명중률 : {PlayerInfo.accuracy}";
-            playerAvoidText.text = $"회피율 : {PlayerInfo.avoidance}";
-            playerHandText.text = $"손재주 : {PlayerInfo.handSpeed}";
-            playerMoveText.text = $"이동속도 : {PlayerInfo.moveSpeed}";
-            playerJumpText.text = $"점프력 : {PlayerInfo.jumpPower}";
+            playerAttackText.text = $"{PlayerInfo.attackPower}";
+            playerPhyDEFText.text = $"{PlayerInfo.phyDEF}";
+            playerMagicText.text = $"{PlayerInfo.magicPower}";
+            playerMagicDEFext.text = $"{PlayerInfo.magicDEF}";
+            playerAccText.text = $"{PlayerInfo.accuracy}";
+            playerAvoidText.text = $"{PlayerInfo.avoidance}";
+            playerHandText.text = $"{PlayerInfo.workmanship}";
+            playerMoveText.text = $"{PlayerInfo.moveSpeed}";
+            playerJumpText.text = $"{PlayerInfo.jumpPower}";
         }
     }
 }
