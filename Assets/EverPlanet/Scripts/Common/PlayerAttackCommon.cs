@@ -60,7 +60,6 @@ public static class PlayerAttackCommon
     public static List<GameObject> TargetMonstersFromPlayer(Vector3 lookDir, Vector3 playerPos, float limitRadius, float limitYDist, float countslimit,float limitAngle = PIDiv03)
     {
         List<GameObject> mobInArea = new List<GameObject>();
-        float dist = float.MaxValue;
         foreach (var mob in MonsterSpawn.activeMonster)
         {
             //°Å¸®

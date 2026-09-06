@@ -247,7 +247,7 @@ public class PlayerAttack : MonoBehaviour
         for(int idx = 0; idx < 3; idx++)
         {
             Sward sward = storm.transform.GetChild(idx).GetComponent<Sward>();
-            sward.skillDamage = 80;
+            sward.skillDamage = 85;
             sward.maxTarget = 10000;
         }
 

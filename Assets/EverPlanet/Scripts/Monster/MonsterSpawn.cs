@@ -64,6 +64,9 @@ public class MonsterSpawn : MonoBehaviour
     /// </summary>
     public void SpawnInTheRoom()
     {
+        //최대 몬스터 수 제한
+        if(activeMonster.Count > 180) return;
+
         Array moveTypeArray = Enum.GetValues(typeof(MonsterMoveType));
         foreach (var trans in spawnPosListInTheRoom)
         {
@@ -118,9 +121,9 @@ public class MonsterSpawn : MonoBehaviour
     void SetMonsterSpec(MonsterMove mobMove)
     {
         mobMove.mobLv = PlayerInfo.playerLv;
-        mobMove.mobMaxHP = mobMove.mobLv * mobMove.mobLv * 20;
-        mobMove.mobExp = mobMove.mobLv*30;
-        mobMove.mobAttack = mobMove.mobLv* (mobMove.mobLv/5);
+        mobMove.mobMaxHP = mobMove.mobLv * mobMove.mobLv * 25;
+        mobMove.mobExp = mobMove.mobLv*31+5*(mobMove.mobLv/4);
+        mobMove.mobAttack = mobMove.mobLv* (mobMove.mobLv/5)+2*mobMove.mobLv-50;
 
         mobMove.SetDiameter();
         mobMove.isAggro = true;
